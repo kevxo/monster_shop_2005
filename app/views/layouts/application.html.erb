@@ -13,12 +13,15 @@
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>
+      <%= link_to 'Register User', '/register/new' %>
     </nav>
-    <% flash.each do |name, msg| %>
+
+    <% flash.each do |name, msg|%>
       <div class= "<%=name%>-flash">
         <p><%= msg %></p>
       </div>
     <% end %>
+
     <%= yield %>
   </body>
 </html>
