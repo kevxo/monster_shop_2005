@@ -44,7 +44,7 @@ RSpec.describe 'Logging in' do
   end
 
   describe 'As a admin user' do
-    xit 'can login with valid credentials' do
+    it 'can login with valid credentials' do
       user_1 = User.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
