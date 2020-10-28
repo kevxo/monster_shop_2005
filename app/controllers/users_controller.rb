@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def create
     @new_user = User.create(user_params)
     if @new_user.save
-      flash[:success] = "You are now registered and logged in!"
       session[:user_id] = @new_user.id
       redirect_to "/profile"
     else
