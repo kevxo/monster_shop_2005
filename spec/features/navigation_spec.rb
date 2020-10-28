@@ -19,7 +19,7 @@ RSpec.describe 'Site Navigation' do
       expect(current_path).to eq('/merchants')
 
       within 'nav' do
-        click_link 'Return Home'
+        click_link 'Home'
       end
 
       expect(current_path).to eq('/')
@@ -79,7 +79,42 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         expect(page).to have_content("Cart: 0")
       end
+    end
+  end
 
+  describe 'As a Logged In User' do
+    it "I see a nav bar with links to all pages except login and register" do
+      user_1 = User.create!(name: 'Grant',
+                        address: '124 Grant Ave.',
+                        city: 'Denver',
+                        state: 'CO',
+                        zip: 12345,
+                        email: 'grant@coolguy.com',
+                        password: 'password')
+      visit '/'
+
+      click_link 'Log In'
+
+      expect(current_path).to eq('/login')
+
+      fill_in :email, with: user_1.email
+      fill_in :password, with: user_1.password
+
+      click_on "Submit"
+
+      within 'nav' do
+        expect(page).to have_link("Logout")
+        expect(page).to have_link("Profile")
+        expect(page).to have_link("All Merchants")
+        expect(page).to have_link("Cart:")
+        expect(page).to have_link("All Items")
+        expect(page).to have_link("Home")
+
+        expect(page).to_not have_link("Log In")
+        expect(page).to_not have_link("Register")
+      end
+      
+      expect(page).to have_content("Hello, #{user_1.name}")
     end
   end
 end
