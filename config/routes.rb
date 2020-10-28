@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-=======
->>>>>>> 2bc2382511536b4b97b08b3b3a8ab17de8e0c9a1
   root 'welcome#index'
 
   get "/merchants", to: "merchants#index"
