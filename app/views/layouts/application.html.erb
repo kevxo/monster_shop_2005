@@ -29,9 +29,13 @@
 
     <% flash.each do |name, msg|%>
       <div class= "<%=name%>-flash">
+      <% if msg.class != String %>
         <% msg.map do |message| %>
-          <p><%= msg %></p>
+          <p><%= message %></p>
         <% end %>
+      <% else %>
+        <p><%=  msg %></p>
+      <% end %>
       </div>
     <% end %>
 
