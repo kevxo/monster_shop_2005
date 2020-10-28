@@ -5,7 +5,4 @@ class User < ApplicationRecord
   validates_presence_of :address, :city, :state, :zip
   has_secure_password
 
-  def email_exists?(email)
-    User.exists?(email: email)
-  end
 end
