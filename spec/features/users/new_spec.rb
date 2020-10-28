@@ -4,7 +4,7 @@ RSpec.describe 'On the registration page' do
   it 'it creates a new user when the form is filled out completely' do
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Grant'
@@ -26,7 +26,7 @@ RSpec.describe 'On the registration page' do
     it 'it shows a flash message when the form is incomplete' do
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Grant'
@@ -40,8 +40,7 @@ RSpec.describe 'On the registration page' do
     click_on 'Submit'
 
     expect(current_path).to eq('/register/new')
-
-    expect(page).to have_content('Please fill in all required fields.')
+    expect(page).to have_content("Email can't be blank")
     expect(page).to_not have_content('You are now registered and logged in!')
   end
 
@@ -55,7 +54,7 @@ RSpec.describe 'On the registration page' do
                       password: 'password')
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Bob'
@@ -70,8 +69,7 @@ RSpec.describe 'On the registration page' do
 
     expect(current_path).to eq('/register/new')
 
-    expect(page).to have_content('Sorry, email already in use. Please enter a valid email address.')
-    expect(page).to_not have_content('Please fill in all required fields.')
+    expect(page).to have_content('Email has already been taken')
     expect(page).to_not have_content('You are now registered and logged in!')
   end
 end
