@@ -112,6 +112,7 @@ RSpec.describe 'Site Navigation' do
 
         expect(page).to_not have_link("Log In")
         expect(page).to_not have_link("Register")
+        expect(page).to_not have_link("Dashboard")
       end
       
       expect(page).to have_content("Hello, #{user_1.name}")
