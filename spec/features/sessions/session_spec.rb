@@ -1,19 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_presence_of(:password) }
-    it { should validate_presence_of :address }
-    it { should validate_presence_of :city }
-    it { should validate_presence_of :state }
-    it { should validate_presence_of :zip }
-    it { should validate_presence_of :email }
-  end
-
-  describe 'roles' do
-    it 'can be created as a default user.' do
+RSpec.describe 'Logging in' do
+  describe 'As a default user' do
+    it 'can login with valid credentials' do
       user_1 = User.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
@@ -22,12 +11,20 @@ RSpec.describe User, type: :model do
                             email: 'grant@coolguy.com',
                             password: 'password',
                             role: 0)
+        visit '/login'
 
-      expect(user_1.role).to eq('default')
-      expect(user_1.default?).to be_truthy
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on 'Submit'
+
+        expect(current_path).to eq('/profile')
+        expect(page).to have_content('Logged In!')
     end
+  end
 
-    it 'can be a merchant' do
+  describe 'As a merchant user' do
+    it 'can login with valid credentials' do
       user_1 = User.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
@@ -36,12 +33,20 @@ RSpec.describe User, type: :model do
                             email: 'grant@coolguy.com',
                             password: 'password',
                             role: 1)
+        visit '/login'
 
-      expect(user_1.role).to eq('merchant')
-      expect(user_1.merchant?).to be_truthy
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on 'Submit'
+
+        expect(current_path).to eq('/merchant')
+        expect(page).to have_content('Logged In!')
     end
+  end
 
-    it 'can be an admin' do
+  describe 'As a admin user' do
+    it 'can login with valid credentials' do
       user_1 = User.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
@@ -50,9 +55,15 @@ RSpec.describe User, type: :model do
                             email: 'grant@coolguy.com',
                             password: 'password',
                             role: 2)
+        visit '/login'
 
-      expect(user_1.role).to eq('admin')
-      expect(user_1.admin?).to be_truthy
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on 'Submit'
+
+        expect(current_path).to eq('/admin')
+        expect(page).to have_content('Logged In!')
     end
   end
 end

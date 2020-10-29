@@ -3,24 +3,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    if !User.find_by(email: params[:email])
-      @new_user = User.create(user_params)
-      if @new_user.save
-        flash[:success] = "You are now registered and logged in!"
-        session[:user_id] = @new_user.id
-        redirect_to "/profile"
-      else
-        flash[:error] = "Please fill in all required fields."
-        redirect_to '/register/new'
-      end
+    @new_user = User.create(user_params)
+    if @new_user.save
+      session[:user_id] = @new_user.id
+      redirect_to "/profile"
     else
-      flash[:error]= 'Sorry, email already in use. Please enter a valid email address.'
+      flash[:error] = @new_user.errors.full_messages
       redirect_to '/register/new'
     end
   end
 
   def show
-    @user = User.find(session[:user_id])
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      flash[:success] = 'Logged In!'
+    else
+      render file: "/public/404"
+    end
   end
 
   private
