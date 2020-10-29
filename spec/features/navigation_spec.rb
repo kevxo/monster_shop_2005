@@ -203,5 +203,91 @@ RSpec.describe 'Site Navigation' do
         expect(page).to have_content("The page you were looking for doesn't exist (404)")
       end
     end
+    describe "As a default user" do
+      it "When trying to access /merchant and /admin" do
+        user_1 = User.create!(name: 'Grant',
+                          address: '124 Grant Ave.',
+                          city: 'Denver',
+                          state: 'CO',
+                          zip: 12345,
+                          email: 'grant@coolguy.com',
+                          password: 'password',
+                          role: 0)
+        visit "/"
+
+        click_link 'Log In'
+
+        expect(current_path).to eq('/login')
+
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on "Submit"
+
+        visit "/merchant"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
+        visit "/admin"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+      end
+    end
+    describe "As a merchant user" do
+      it "When trying to access /merchant and /admin" do
+        user_1 = User.create!(name: 'Grant',
+                          address: '124 Grant Ave.',
+                          city: 'Denver',
+                          state: 'CO',
+                          zip: 12345,
+                          email: 'grant@coolguy.com',
+                          password: 'password',
+                          role: 1)
+        visit "/"
+
+        click_link 'Log In'
+
+        expect(current_path).to eq('/login')
+
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on "Submit"
+
+        visit "/admin"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+      end
+    end
+    describe "As a admin user" do
+      it "When trying to access /merchant and /admin" do
+        user_1 = User.create!(name: 'Grant',
+                          address: '124 Grant Ave.',
+                          city: 'Denver',
+                          state: 'CO',
+                          zip: 12345,
+                          email: 'grant@coolguy.com',
+                          password: 'password',
+                          role: 2)
+        visit "/"
+
+        click_link 'Log In'
+
+        expect(current_path).to eq('/login')
+
+        fill_in :email, with: user_1.email
+        fill_in :password, with: user_1.password
+
+        click_on "Submit"
+
+        visit "/merchant"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
+        visit "/cart"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+      end
+    end
   end
 end
