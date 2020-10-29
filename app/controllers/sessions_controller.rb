@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      flash[:error] = "You are already logged in"
+      redirect_to '/profile' if current_user.default?
+      redirect_to '/merchant' if current_user.merchant?
+      redirect_to '/admin' if current_user.admin?
+    end
+
   end
 
   def create
