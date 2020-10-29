@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   # sessions
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-
+  delete '/logout', to: 'sessions#destroy'
+  
   namespace :merchant do
     get '/', to: 'dashboard#index'
   end
