@@ -187,5 +187,21 @@ RSpec.describe 'Site Navigation' do
           end
         end
       end
+      describe "As a visitor" do
+        it "When trying to access any path that begins with /merchant, /admin, or /profile it returns a 404 error" do
+
+        visit "/merchant"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
+        visit "/admin"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
+        visit "/profile"
+
+        expect(page).to have_content("The page you were looking for doesn't exist (404)")
+      end
+    end
   end
 end
