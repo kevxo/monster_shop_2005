@@ -4,7 +4,7 @@ RSpec.describe 'On the registration page' do
   it 'it creates a new user when the form is filled out completely' do
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Grant'
@@ -18,15 +18,14 @@ RSpec.describe 'On the registration page' do
     click_on 'Submit'
 
     expect(current_path).to eq('/profile')
-
-    expect(page).to have_content('You are now registered and logged in!')
+    expect(page).to have_content('Logged In!')
     expect(page).to have_content('Hello, Grant!')
   end
 
     it 'it shows a flash message when the form is incomplete' do
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Grant'
@@ -55,7 +54,7 @@ RSpec.describe 'On the registration page' do
                       password: 'password')
     visit '/'
 
-    click_on 'Register User'
+    click_on 'Register'
     expect(current_path).to eq('/register/new')
 
     fill_in :name, with: 'Bob'
