@@ -166,3 +166,30 @@ RSpec.describe 'Logging in' do
     end
   end
 end
+
+RSpec.describe 'Logging out' do
+  describe 'A registered user is able to log out' do
+    it "user can log out and is redirected to the home page" do
+      user_1 = User.create!(name: 'Grant',
+                            address: '124 Grant Ave.',
+                            city: 'Denver',
+                            state: 'CO',
+                            zip: 12_345,
+                            email: 'grant@coolguy.com',
+                            password: 'password',
+                            role: 0)
+      visit '/login'
+
+      fill_in :email, with: user_1.email
+      fill_in :password, with: user_1.password
+
+      click_on 'Submit'
+
+      click_on 'Logout'
+
+      expect(current_path).to eq('/')
+      expect(page).to have_content("You are now logged out")
+    end
+  end
+
+end
