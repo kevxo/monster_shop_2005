@@ -1,13 +1,10 @@
 class CartController < ApplicationController
-before_action :require_merchant || :require_default
+ before_action :reject_admin
 
-def require_merchant
-  render file: "/public/404" unless current_merchant?
-end
-
-def require_default
-  render file: "/public/404" unless current_default?
-end
+  def reject_admin
+    return unless current_admin? 
+      render file: "/public/404"
+  end
 
   def add_item
     item = Item.find(params[:item_id])
