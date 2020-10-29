@@ -1,4 +1,4 @@
-class ItemsController<ApplicationController
+class ItemsController < ApplicationController
 
   def index
     if params[:merchant_id]

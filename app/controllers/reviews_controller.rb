@@ -1,4 +1,4 @@
-class ReviewsController<ApplicationController
+class ReviewsController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
