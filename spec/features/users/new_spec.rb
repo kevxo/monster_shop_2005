@@ -18,6 +18,7 @@ RSpec.describe 'On the registration page' do
     click_on 'Submit'
 
     expect(current_path).to eq('/profile')
+
     expect(page).to have_content('Logged In!')
     expect(page).to have_content('Hello, Grant!')
   end
@@ -39,7 +40,8 @@ RSpec.describe 'On the registration page' do
     click_on 'Submit'
 
     expect(current_path).to eq('/register/new')
-    expect(page).to have_content("Email can't be blank")
+
+    expect(page).to have_content("Email can't be blank.")
     expect(page).to_not have_content('You are now registered and logged in!')
   end
 
@@ -67,8 +69,8 @@ RSpec.describe 'On the registration page' do
     click_on 'Submit'
 
     expect(current_path).to eq('/register/new')
-    expect(page).to have_content('Email has already been taken')
-    expect(page).to_not have_content('Please fill in all required fields.')
+
+    expect(page).to have_content('Email has already been taken.')
     expect(page).to_not have_content('You are now registered and logged in!')
   end
 end

@@ -1,4 +1,14 @@
 class CartController < ApplicationController
+before_action :require_merchant || :require_default
+
+def require_merchant
+  render file: "/public/404" unless current_merchant?
+end
+
+def require_default
+  render file: "/public/404" unless current_default?
+end
+
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)
