@@ -17,6 +17,9 @@
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Profile", "/profile" %>
         <%= link_to "Logout", "/logout", method: :delete %>
+        <% if current_user.merchant? %>
+          <%= link_to "Dashboard", "/merchant/dashboard" %>
+        <% end %>
       <% else %>
         <%= link_to 'Home', '/' %>
         <%= link_to "All Merchants", "/merchants"%>
