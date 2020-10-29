@@ -126,7 +126,8 @@ RSpec.describe 'Site Navigation' do
                         state: 'CO',
                         zip: 12345,
                         email: 'hanna@coolchick.com',
-                        password: 'password')
+                        password: 'password',
+                        role: 1)
       visit '/'
 
       click_link 'Log In'
@@ -139,6 +140,7 @@ RSpec.describe 'Site Navigation' do
       click_on "Submit"
 
       within 'nav' do
+        expect(page).to have_link("Dashboard")
         expect(page).to have_link("Logout")
         expect(page).to have_link("Profile")
         expect(page).to have_link("All Merchants")
@@ -149,8 +151,6 @@ RSpec.describe 'Site Navigation' do
         expect(page).to_not have_link("Log In")
         expect(page).to_not have_link("Register")
       end
-      
-      expect(page).to have_content("Hello, #{user_1.name}")
     end
   end
 end
