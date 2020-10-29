@@ -14,8 +14,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
-    flash[:success] = 'Logged In!'
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      flash[:success] = 'Logged In!'
+    else
+      render file: "/public/404"
+    end
   end
 
   private
