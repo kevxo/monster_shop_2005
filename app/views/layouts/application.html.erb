@@ -10,15 +10,32 @@
 
   <body>
     <nav class = "topnav">
-      <%= link_to "All Merchants", "/merchants"%>
-      <%= link_to "All Items", "/items"%>
-      <%= link_to "Cart: #{cart.total_items}", "/cart" %>
-      <%= link_to 'Register User', '/register/new' %>
+      <% if current_user %>
+        <%= link_to 'Home', '/' %>
+        <%= link_to "All Merchants", "/merchants"%>
+        <%= link_to "All Items", "/items"%>
+        <%= link_to "Cart: #{cart.total_items}", "/cart" %>
+        <%= link_to "Profile", "/profile" %>
+        <%= link_to "Logout", "/logout", method: :delete %>
+      <% else %>
+        <%= link_to 'Home', '/' %>
+        <%= link_to "All Merchants", "/merchants"%>
+        <%= link_to "All Items", "/items"%>
+        <%= link_to 'Register', '/register/new' %>
+        <%= link_to 'Log In', '/login' %>
+        <%= link_to "Cart: #{cart.total_items}", "/cart" %>
+      <% end %>
     </nav>
 
     <% flash.each do |name, msg|%>
       <div class= "<%=name%>-flash">
-        <p><%= msg %></p>
+      <% if msg.class != String %>
+        <% msg.map do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      <% else %>
+        <p><%=  msg %></p>
+      <% end %>
       </div>
     <% end %>
 
