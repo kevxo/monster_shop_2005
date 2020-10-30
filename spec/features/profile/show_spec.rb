@@ -45,20 +45,12 @@ RSpec.describe 'On the user profile page' do
     click_on 'Submit'
     click_on 'Edit Profile'
     expect(current_path).to eq('/profile/edit')
-save_and_open_page
-    expect(page).to have_content(user_1.name)
-    expect(page).to have_content(user_1.address)
-    expect(page).to have_content(user_1.city)
-    expect(page).to have_content(user_1.state)
-    expect(page).to have_content(user_1.zip)
-    expect(page).to have_content(user_1.email)
 
     fill_in :name, with: user_1.name
     fill_in :address, with: user_1.address
     fill_in :city, with: user_1.city
     fill_in :state, with: user_1.state
     fill_in :zip, with: '54321'
-    fill_in :password, with: user_1.password
     click_on 'Submit'
     expect(current_path).to eq('/profile')
     expect(page).to have_content('Updated!')

@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    require 'pry'; binding.pry
     user = User.find(session[:user_id])
     user.update(user_params)
     user.save
     redirect_to "/profile"
+    flash[:notice] = 'Updated!'
   end
 
   private
