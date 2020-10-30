@@ -53,7 +53,7 @@ RSpec.describe 'On the user profile page' do
     fill_in :zip, with: '54321'
     click_on 'Submit'
     expect(current_path).to eq('/profile')
-    expect(page).to have_content('Updated!')
+    expect(page).to have_content('Profile Updated!')
 
     expect(page).to have_content('54321')
   end
