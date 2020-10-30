@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  
+
   namespace :merchant do
     get '/', to: 'dashboard#index'
   end
@@ -54,5 +54,5 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#show'
   patch '/profile', to: 'users#update'
   get '/profile/edit', to: 'users#edit'
-  get '/profile/change_password', to: 'users#edit'
+  get '/profile/change_password', to: 'users#password_edit'
 end
