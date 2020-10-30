@@ -32,17 +32,27 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(session[:user_id])
-    @user.update(user_params)
-    require "pry"
-    binding.pry
-    @user.save
-    flash[:notice] = 'Profile Updated!'
-    render :show
+    if user_params[:name]
+      @user.update(user_params)
+      @user.save
+      flash[:notice] = 'Profile Updated!'
+      render :show
+    else
+      if user_params[:password] == user_params[:password_confirmation]
+        @user.update(user_params)
+        @user.save
+        flash.now[:notice] = "Password Updated!"
+        render :show
+      else
+        flash.now[:notice] = "Password and Confirmation do not match."
+        render :password_edit
+      end
+    end
   end
 
   private
 
   def user_params
-    params.permit(:name, :address, :city, :state, :zip, :email, :password)
+    params.permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
   end
 end
