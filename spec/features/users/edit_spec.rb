@@ -50,9 +50,10 @@ RSpec.describe 'On the profile edit page' do
     expect(current_path).to eq('/profile/change_password')
 
     fill_in :password, with: 'new password'
+    fill_in :password_confirmation, with: 'new password'
     click_on 'Submit'
     expect(current_path).to eq('/profile')
-    # expect(page).to have_content('Password Updated!')
+    expect(page).to have_content('Password Updated!')
 
     click_on "Logout"
 
