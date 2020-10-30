@@ -59,19 +59,6 @@ RSpec.describe "Items Index Page" do
       # end
     end
 
-    it "any user can visit the index page and see all items that are not disabled" do
-      visit '/items'
 
-      expect(page).to have_link(@tire.name)
-      expect(page).to have_link(@pull_toy.name)
-      expect(page).to_not have_link(@dog_bone.name)
-    end
-
-    it "any user can click on an item's image and be redirected to the item's show page" do
-      visit '/items'
-
-      link = find(:xpath, "//a/img[@alt='Gatorskins Image']/..")
-      link.click
-    end
   end
 end
