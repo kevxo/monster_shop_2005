@@ -33,10 +33,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(session[:user_id])
     if user_params[:name]
-      @user.update(user_params)
-      @user.save
-      flash[:notice] = 'Profile Updated!'
-      render :show
+      if @user.email == user_params[:email] || !User.where(email: user_params[:email])
+        @user.update(user_params)
+        @user.save
+        flash[:notice] = 'Profile Updated!'
+        render :show
+      else
+        flash.now[:notice] = "Email is already in use."
+        render :edit
+      end
     else
       if user_params[:password] == user_params[:password_confirmation]
         @user.update(user_params)
