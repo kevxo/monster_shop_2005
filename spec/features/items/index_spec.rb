@@ -19,8 +19,9 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_link(@tire.merchant.name)
       expect(page).to have_link(@pull_toy.name)
       expect(page).to have_link(@pull_toy.merchant.name)
-      expect(page).to have_link(@dog_bone.name)
-      expect(page).to have_link(@dog_bone.merchant.name)
+      #ASK ALEX ABOUT THIS
+      # expect(page).to have_link(@dog_bone.name)
+      # expect(page).to have_link(@dog_bone.merchant.name)
     end
 
     it "I can see a list of all of the items "do
@@ -46,16 +47,31 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@pull_toy.image}']")
       end
+      #ASK ALEX ABOUT THIS
+      # within "#item-#{@dog_bone.id}" do
+      #   expect(page).to have_link(@dog_bone.name)
+      #   expect(page).to have_content(@dog_bone.description)
+      #   expect(page).to have_content("Price: $#{@dog_bone.price}")
+      #   expect(page).to have_content("Inactive")
+      #   expect(page).to have_content("Inventory: #{@dog_bone.inventory}")
+      #   expect(page).to have_link(@brian.name)
+      #   expect(page).to have_css("img[src*='#{@dog_bone.image}']")
+      # end
+    end
 
-      within "#item-#{@dog_bone.id}" do
-        expect(page).to have_link(@dog_bone.name)
-        expect(page).to have_content(@dog_bone.description)
-        expect(page).to have_content("Price: $#{@dog_bone.price}")
-        expect(page).to have_content("Inactive")
-        expect(page).to have_content("Inventory: #{@dog_bone.inventory}")
-        expect(page).to have_link(@brian.name)
-        expect(page).to have_css("img[src*='#{@dog_bone.image}']")
-      end
+    it "any user can visit the index page and see all items that are not disabled" do
+      visit '/items'
+
+      expect(page).to have_link(@tire.name)
+      expect(page).to have_link(@pull_toy.name)
+      expect(page).to_not have_link(@dog_bone.name)
+    end
+
+    it "any user can click on an item's image and be redirected to the item's show page" do
+      visit '/items'
+
+      link = find(:xpath, "//a/img[@alt='Gatorskins Image']/..")
+      link.click
     end
   end
 end
