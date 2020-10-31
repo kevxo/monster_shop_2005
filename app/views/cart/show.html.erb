@@ -30,7 +30,11 @@
       </td>
       <td>
         <center>
-          <p><%=quantity%></p>
+          <%= quantity %>
+            <%= form_tag "/cart/#{item.id}", method: :patch do %>
+            <%=  number_field_tag :quantity, quantity, max: item.inventory, min: 0 %>
+            <p><%= submit_tag 'Quantity +'%></p>
+          <% end %>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
         </td>
@@ -39,6 +43,7 @@
     </td>
     </tr>
   <% end %>
+
 </table>
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
