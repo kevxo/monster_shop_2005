@@ -19,8 +19,12 @@ class CartController < ApplicationController
   end
 
   def add_quantity
-    require 'pry' ; binding.pry
-    redirect_to "/cart"
+    item = Item.find(params[:item_id])
+    if params[:commit] == 'Quantity +'
+      cart.add_item(item.id.to_s)
+      redirect_to "/cart"
+    end
+    # require 'pry' ; binding.pry
   end
 
   def empty
