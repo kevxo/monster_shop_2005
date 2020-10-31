@@ -25,4 +25,8 @@ class Item < ApplicationRecord
     item_orders.empty?
   end
 
+  def increment_quantity
+    require 'pry' ; binding.pry
+  end
+
 end
