@@ -99,6 +99,7 @@ RSpec.describe 'Cart show' do
             expect(page).to have_button('Quantity +')
             click_button 'Quantity +'
           end
+
           expect(current_path).to eq("/cart")
 
           within "#cart-item-#{item.id}" do

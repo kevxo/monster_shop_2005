@@ -19,7 +19,8 @@ class CartController < ApplicationController
   end
 
   def add_quantity
-    cart.add_quantity
+    require 'pry' ; binding.pry
+    redirect_to "/cart"
   end
 
   def empty

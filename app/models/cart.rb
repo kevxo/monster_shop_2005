@@ -32,8 +32,4 @@ class Cart
     end
   end
 
-  def add_quantity
-    require 'pry' ; binding.pry
-  end
-
 end
