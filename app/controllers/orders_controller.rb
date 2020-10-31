@@ -1,8 +1,6 @@
 class OrdersController < ApplicationController
 
-  def new
-
-  end
+  def new; end
 
   def show
     @order = Order.find(params[:id])
@@ -15,7 +13,8 @@ class OrdersController < ApplicationController
         order.item_orders.create({
           item: item,
           quantity: quantity,
-          price: item.price
+          price: item.price,
+          user_id: session[:user_id]
           })
       end
       session.delete(:cart)
