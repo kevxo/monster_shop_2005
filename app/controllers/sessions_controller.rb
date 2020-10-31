@@ -10,24 +10,31 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    if @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      Order.update(user_id: session[:user_id])
-      if @user.role == 'default'
-        redirect_to '/profile'
-      elsif @user.role == 'merchant'
-        redirect_to '/merchant'
+    if @user
+      if @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        if @user.role == 'default'
+          redirect_to '/profile'
+        elsif @user.role == 'merchant'
+          redirect_to '/merchant'
+        else
+          redirect_to '/admin'
+        end
       else
-        redirect_to '/admin'
+        flash[:error] = 'Credentials are incorrect'
+        redirect_to '/login'
       end
     else
-      flash[:error] = 'Credentials are incorrect'
-      redirect_to '/login'
+      flash[:error] = 'Account not found.'
+      redirect_to '/register/new'
     end
   end
 
   def destroy
-    session.delete(:user_id)
+    # session.delete(:user_id)
+    # User.find(session[:user_id]).destroy
+    session[:user_id] = nil
+    # reset_session
     flash[:success] = "You are now logged out"
     redirect_to '/'
   end
