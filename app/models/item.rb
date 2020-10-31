@@ -27,6 +27,8 @@ class Item < ApplicationRecord
 
   def increment_quantity
     require 'pry' ; binding.pry
+    item = ItemOrder.find_by(item_id: self.id)
+    item.quantity += 1
   end
 
 end

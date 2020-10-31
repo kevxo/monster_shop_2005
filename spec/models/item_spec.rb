@@ -50,9 +50,10 @@ describe Item, type: :model do
     end
 
     it 'increment quantity' do
-      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-      order.item_orders.create(item: @chain, price: @chain.price, quantity: 1)
-      order.item_orders.create(item: @tire, price: @tire.price, quantity: 1)
+      order1 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order2 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order1.item_orders.create(item: @chain, price: @chain.price, quantity: 1)
+      order2.item_orders.create(item: @tire, price: @tire.price, quantity: 1)
       expect(@chain.increment_quantity).to eq(2)
       expect(@tire.increment_quantity).to eq(2)
     end

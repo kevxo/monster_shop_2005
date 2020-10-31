@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   patch '/reviews/:id', to: 'reviews#update'
   delete '/reviews/:id', to: 'reviews#destroy'
 
+  post '/cart', to: 'cart#add_quantity'
   post '/cart/:item_id', to: 'cart#add_item'
   get '/cart', to: 'cart#show'
   delete '/cart', to: 'cart#empty'
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  
+
   namespace :merchant do
     get '/', to: 'dashboard#index'
   end

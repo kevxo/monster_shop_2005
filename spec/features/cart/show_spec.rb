@@ -95,13 +95,13 @@ RSpec.describe 'Cart show' do
         visit '/cart'
 
         @items_in_cart.each do |item|
-          within "#cart-item #{item.id}" do
-            expect(page).to have_link('Quantity +')
-            click_link 'Quantity +'
+          within "#cart-item-#{item.id}" do
+            expect(page).to have_button('Quantity +')
+            click_button 'Quantity +'
           end
-          expect(current_path).to eq('/cart')
+          expect(current_path).to eq("/cart")
 
-          within "#cart-item #{item.id}" do
+          within "#cart-item-#{item.id}" do
             expect(page).to have_content("2")
             expect(page).to_not have_content("1")
             expect(page).to have_content("$#{item.price}")
