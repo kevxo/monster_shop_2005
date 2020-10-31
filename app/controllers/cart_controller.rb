@@ -24,7 +24,6 @@ class CartController < ApplicationController
       cart.add_item(item.id.to_s)
       redirect_to "/cart"
     end
-    # require 'pry' ; binding.pry
   end
 
   def empty
