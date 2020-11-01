@@ -98,11 +98,13 @@ RSpec.describe 'Cart show' do
         @items_in_cart.each do |item|
           within "#cart-item-#{item.id}" do
             expect(page).to have_button('Quantity +')
+            fill_in :quantity, with: '1'
             click_button 'Quantity +'
           end
 
           expect(current_path).to eq("/cart")
 
+          save_and_open_page
           within "#cart-item-#{item.id}" do
             expect(page).to have_content("2")
             expect(page).to have_content("$#{item.price}")
@@ -115,11 +117,11 @@ RSpec.describe 'Cart show' do
         @items_in_cart.each do |item|
           within "#cart-item-#{item.id}" do
             expect(page).to have_button('Quantity -')
+            fill_in :quantity, with: "1"
             click_button 'Quantity -'
           end
 
           expect(current_path).to eq("/cart")
-
           expect(page).to_not have_link(@paper.name)
           expect(page).to_not have_css("img[src*='#{@paper.image}']")
           expect(page).to_not have_content("$#{@paper.price}")
