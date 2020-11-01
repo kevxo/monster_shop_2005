@@ -8,3 +8,13 @@
     <li><%= @merchant.zip %></li>
   </ul>
 </section>
+
+<section id="order-item-info">
+  <% @merchant.item_orders do |order| %>
+
+    <p><%= order.created_at %></p>
+    <p><%= order.total_quantity %></p>
+    <p><%= order.total_value %></p>
+  <% end %>
+</section>
+
