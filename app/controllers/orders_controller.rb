@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
 
   end
 
+
+
   def show
     @order = Order.find(params[:id])
   end
@@ -31,10 +33,10 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
 
   def order_params
-    params.permit(:name, :address, :city, :state, :zip)
+    params[:user_id] = current_user.id
+    params.permit(:name, :address, :city, :state, :zip, :user_id)
   end
 end

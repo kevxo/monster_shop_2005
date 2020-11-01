@@ -14,6 +14,7 @@ RSpec.describe("Order Creation") do
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
+      @user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
 
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
@@ -47,6 +48,8 @@ RSpec.describe("Order Creation") do
     end
 
     it 'I can create a new order' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+
       name = "Bert"
       address = "123 Sesame St."
       city = "NYC"
@@ -73,6 +76,8 @@ RSpec.describe("Order Creation") do
     end
 
     it 'I cant create order if info not filled out' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+
       name = ""
       address = "123 Sesame St."
       city = "NYC"

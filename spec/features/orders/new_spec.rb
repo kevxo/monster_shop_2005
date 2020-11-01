@@ -18,6 +18,7 @@ RSpec.describe("New Order Page") do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
     end
+    
     it "I see all the information about my current cart" do
       visit "/cart"
       user_1 = User.create!(name: 'Grant',
