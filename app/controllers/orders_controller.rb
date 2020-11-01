@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
-
+  def index
+    flash[:notice] = "Order successfully created!"
+    @orders = Order.all
+  end
+  
   def new; end
 
   def show
