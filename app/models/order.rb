@@ -7,4 +7,8 @@ class Order < ApplicationRecord
   def grandtotal
     item_orders.sum('price * quantity')
   end
+
+  def default_status
+    self.status ||= "pending"
+  end
 end

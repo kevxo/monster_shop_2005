@@ -10,6 +10,16 @@ class Cart
     @contents[item] += 1
   end
 
+  def add_quantity(item, quantity = '1')
+    integer = quantity.to_i
+    @contents[item] += integer
+  end
+
+  def minus_quantity(item, quantity = '1')
+    integer = quantity.to_i
+    @contents[item] -= integer
+  end
+
   def total_items
     @contents.values.sum
   end
@@ -31,5 +41,4 @@ class Cart
       Item.find(item_id).price * quantity
     end
   end
-
 end
