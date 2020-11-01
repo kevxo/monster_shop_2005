@@ -15,7 +15,12 @@ class CartController < ApplicationController
   end
 
   def show
-    @items = cart.items
+    if current_user
+      @items = cart.items
+    else
+      flash[:notice] = "You must either register or login to checkout."
+      @items = cart.items
+    end
   end
 
   def quantity_increments
