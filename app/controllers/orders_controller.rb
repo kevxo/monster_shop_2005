@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
   def new
 
   end
@@ -19,17 +18,17 @@ class OrdersController < ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to "/orders/#{order.id}"
+      redirect_to "/profile/orders"
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
   end
 
-
   private
 
   def order_params
-    params.permit(:name, :address, :city, :state, :zip)
+    params[:user_id] = current_user.id
+    params.permit(:name, :address, :city, :state, :zip, :user_id)
   end
 end

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   post '/cart/:item_id', to: 'cart#add_item'
   get '/cart', to: 'cart#show'
+  patch '/cart/:item_id', to: 'cart#quantity_increments'
   delete '/cart', to: 'cart#empty'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
@@ -37,6 +38,9 @@ Rails.application.routes.draw do
 
   get '/register/new', to: 'users#new'
   post '/users', to: 'users#create'
+
+  get '/profile', to: 'users#show'
+  # get '/profile/orders', to: 'orders#index'
 
   # sessions
   get '/login', to: 'sessions#new'
@@ -55,4 +59,5 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update'
   get '/profile/edit', to: 'users#edit'
   get '/profile/change_password', to: 'users#password_edit'
+  get '/profile/orders', to: 'user_orders#index'
 end
