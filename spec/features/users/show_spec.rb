@@ -26,5 +26,9 @@ RSpec.describe 'On the user profile page' do
     expect(page).to have_content(user_1.zip)
     expect(page).to have_content(user_1.email)
     expect(page).to have_link("Edit Profile")
+    expect(page).to have_link("My Orders")
+
+    click_on 'My Orders'
+    expect(current_path).to eq('/profile/orders')
   end
 end

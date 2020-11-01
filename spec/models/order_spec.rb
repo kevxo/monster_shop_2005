@@ -36,5 +36,8 @@ describe Order, type: :model do
     it 'default_status' do
       expect(@order_1.default_status).to eq("pending")
     end
+    it 'total_quantity' do
+      expect(@order_1.total_quantity).to eq(5)
+    end
   end
 end

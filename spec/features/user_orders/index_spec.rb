@@ -25,34 +25,35 @@ RSpec.describe 'On the user orders page' do
 
     @tire = @meg.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
     @pull_toy = @meg.items.create!(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
+    @toilet_paper = @meg.items.create!(name: "Toilet Paper", description: "Your butt will love it!", price: 21, image: "https://cdn.shopify.com/s/files/1/1320/9925/products/WGAC_ProductPhotos_2018Packaging_TransparentBG_DLSingleRoll_large.png?v=1578973373", inventory: 12)
 
     @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
     @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
-      #
-      # visit '/login'
-      #
-      # fill_in :email, with: @user_1.email
-      # fill_in :password, with: @user_1.password
-      # click_on 'Submit'
-    end
 
-  it 'it shows a link to to view your orders' do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+    @order_2.item_orders.create!(item: @toilet_paper, price: @toilet_paper.price, quantity: 3)
 
-    visit '/profile'
-    expect(page).to have_content('My Orders')
+    visit '/login'
 
-    click_on 'My Orders'
-    expect(current_path).to eq('/profile/orders')
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_on 'Submit'
   end
 
   it 'it shows the order attributes' do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
-
     visit '/profile/orders'
 
-    require "pry"; binding.pry
     expect(page).to have_link("Order #{@order_1.id}")
-    expect(page).to have_content("#{@order_1.created_at}")
+    expect(page).to have_content("Created On: #{@order_1.created_at.strftime("%m-%d-%Y")}")
+    expect(page).to have_content("Updated On: #{@order_1.updated_at.strftime("%m-%d-%Y")}")
+    expect(page).to have_content("#{@order_1.status}")
+    expect(page).to have_content("#{@order_1.total_quantity}")
+    expect(page).to have_content("#{@order_1.grandtotal}")
+
+    expect(page).to have_link("Order #{@order_2.id}")
+    expect(page).to have_content("Created On: #{@order_2.created_at.strftime("%m-%d-%Y")}")
+    expect(page).to have_content("Updated On: #{@order_2.updated_at.strftime("%m-%d-%Y")}")
+    expect(page).to have_content("#{@order_2.status}")
+    expect(page).to have_content("#{@order_2.total_quantity}")
+    expect(page).to have_content("#{@order_2.grandtotal}")
   end
 end

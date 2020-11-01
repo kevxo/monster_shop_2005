@@ -18,7 +18,7 @@ RSpec.describe("New Order Page") do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
     end
-    
+
     it "I see all the information about my current cart" do
       visit "/cart"
       user_1 = User.create!(name: 'Grant',
@@ -166,7 +166,7 @@ RSpec.describe("New Order Page") do
     fill_in :zip, with: user_1.zip
     click_on "Create Order"
 
-    expect(current_path).to eq('/profile/orders')
+    expect(current_path).to eq("/profile/orders")
     expect(page).to have_content("Order successfully created!")
     expect(page).to have_content("Cart: 0")
   end
