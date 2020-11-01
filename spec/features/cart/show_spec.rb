@@ -124,7 +124,6 @@ RSpec.describe 'Cart show' do
           expect(page).to_not have_css("img[src*='#{@paper.image}']")
           expect(page).to_not have_content("$#{@paper.price}")
           expect(page).to_not have_content("$#{@paper.price}")
-
         end
       end
     end
