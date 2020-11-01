@@ -18,11 +18,17 @@ class CartController < ApplicationController
     @items = cart.items
   end
 
-  def add_quantity
+  def quantity_increments
     item = Item.find(params[:item_id])
     if params[:commit] == 'Quantity +'
-      cart.add_item(item.id.to_s)
+      cart.add_quantity(item.id.to_s, quantity = params[:quantity])
       redirect_to "/cart"
+    elsif params[:commit] == 'Quantity -'
+      if cart.minus_quantity(item.id.to_s, quantity = params[:quantity]) == 0
+        remove_item
+      else
+        redirect_to "/cart"
+      end
     end
   end
 

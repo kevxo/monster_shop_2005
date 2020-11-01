@@ -109,6 +109,24 @@ RSpec.describe 'Cart show' do
           end
         end
       end
+
+      it 'should see a button or link to decrement the count of items I want to puchase. If 0, then remove item from cart.' do
+        visit '/cart'
+        @items_in_cart.each do |item|
+          within "#cart-item-#{item.id}" do
+            expect(page).to have_button('Quantity -')
+            click_button 'Quantity -'
+          end
+
+          expect(current_path).to eq("/cart")
+
+          expect(page).to_not have_link(@paper.name)
+          expect(page).to_not have_css("img[src*='#{@paper.image}']")
+          expect(page).to_not have_content("$#{@paper.price}")
+          expect(page).to_not have_content("$#{@paper.price}")
+
+        end
+      end
     end
   end
 end
