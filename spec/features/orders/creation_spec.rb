@@ -30,6 +30,8 @@ RSpec.describe("Order Creation") do
     end
 
     it 'I can create a new order' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+
       name = "Bert"
       address = "123 Sesame St."
       city = "NYC"
@@ -90,6 +92,8 @@ RSpec.describe("Order Creation") do
     end
 
     it 'i cant create order if info not filled out' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+
       name = ""
       address = "123 Sesame St."
       city = "NYC"
@@ -107,7 +111,5 @@ RSpec.describe("Order Creation") do
       expect(page).to have_content("Please complete address form to create an order.")
       expect(page).to have_button("Create Order")
     end
-
-
   end
 end

@@ -27,20 +27,21 @@ RSpec.describe 'On the user orders page' do
       click_on 'Submit'
     end
 
-  it 'it shows a link to to view your orders' do
-    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
-    visit '/login'
+  xit 'it shows a link to to view your orders' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+    # visit '/login'
 
-    fill_in :email, with: @user_1.email
-    fill_in :password, with: @user_1.password
-    click_on 'Submit'
+    # fill_in :email, with: @user_1.email
+    # fill_in :password, with: @user_1.password
+    # click_on 'Submit'
+    visit '/profile'
     expect(page).to have_content('My Orders')
     
     click_on 'My Orders'
     expect(current_path).to eq('/profile/orders')
   end
 
-  it 'it shows the order attributes' do
+  xit 'it shows the order attributes' do
     visit '/profile'
     expect(page).to have_content('My Orders')
     

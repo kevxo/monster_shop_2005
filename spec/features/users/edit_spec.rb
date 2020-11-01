@@ -67,8 +67,9 @@ RSpec.describe 'On the profile edit page' do
 
     expect(current_path).to eq("/profile")
   end
+
   it "if a user updates their email with one that's taken they see a flash message" do
-  user_1 = User.create!(name: 'Grant',
+   user_1 = User.create!(name: 'Grant',
                         address: '124 Grant Ave.',
                         city: 'Denver',
                         state: 'CO',
