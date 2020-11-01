@@ -8,13 +8,13 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.create(order_params)
+    # order.update(user_id: current_user.id)
     if order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
           item: item,
           quantity: quantity,
-          price: item.price,
-          user_id: session[:user_id]
+          price: item.price
           })
       end
       session.delete(:cart)
@@ -25,10 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
 
   def order_params
-    params.permit(:name, :address, :city, :state, :zip)
+    params[:user_id] = current_user.id
+    params.permit(:name, :address, :city, :state, :zip, :user_id)
   end
 end
