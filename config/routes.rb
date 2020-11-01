@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   get '/register/new', to: 'users#new'
   post '/users', to: 'users#create'
+
   get '/profile', to: 'users#show'
   get '/profile/orders', to: 'orders#index'
 
@@ -53,4 +54,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#index'
   end
+
+  get '/profile', to: 'users#show'
+  patch '/profile', to: 'users#update'
+  get '/profile/edit', to: 'users#edit'
+  get '/profile/change_password', to: 'users#password_edit'
 end
