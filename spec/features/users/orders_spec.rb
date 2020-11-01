@@ -27,13 +27,9 @@ RSpec.describe 'On the user orders page' do
       click_on 'Submit'
     end
 
-  xit 'it shows a link to to view your orders' do
+  it 'it shows a link to to view your orders' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
-    # visit '/login'
 
-    # fill_in :email, with: @user_1.email
-    # fill_in :password, with: @user_1.password
-    # click_on 'Submit'
     visit '/profile'
     expect(page).to have_content('My Orders')
     
