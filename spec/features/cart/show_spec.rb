@@ -104,7 +104,6 @@ RSpec.describe 'Cart show' do
 
           expect(current_path).to eq("/cart")
 
-          save_and_open_page
           within "#cart-item-#{item.id}" do
             expect(page).to have_content("2")
             expect(page).to have_content("$#{item.price}")
