@@ -45,5 +45,5 @@
   <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
 </section>
 <section id="datecreated">
-  <p> <%= @order.created_at%></p>
+  <p> <%= @order.created_at.strftime("%m-%d-%Y")%></p>
 </section>

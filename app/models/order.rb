@@ -13,4 +13,8 @@ class Order < ApplicationRecord
   def default_status
     self.status ||= "pending"
   end
+
+  def total_quantity
+    item_orders.sum(:quantity)
+  end
 end

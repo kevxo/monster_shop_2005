@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
 
   get '/profile', to: 'users#show'
-  get '/profile/orders', to: 'orders#index'
+  # get '/profile/orders', to: 'orders#index'
 
   # sessions
   get '/login', to: 'sessions#new'
@@ -59,5 +59,5 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update'
   get '/profile/edit', to: 'users#edit'
   get '/profile/change_password', to: 'users#password_edit'
-  get '/profile/orders', to: 'orders#index'
+  get '/profile/orders', to: 'user_orders#index'
 end
