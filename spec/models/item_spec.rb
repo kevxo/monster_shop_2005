@@ -77,6 +77,20 @@ describe Item, type: :model do
       expect(@stress_ball.quantity_purchased).to eq(0)
       expect(@tire.quantity_purchased).to_not eq(3)
     end
+
+    it "#subtotal" do
+      @meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+
+      @tire = @meg.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+
+      @user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
+
+      @order_1 = @user_1.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+
+      @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+
+      expect(@tire.subtotal).to eq(200)
+    end
   end
 
   describe 'class methods' do

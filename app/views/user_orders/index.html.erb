@@ -1,6 +1,6 @@
 <h1>My Orders</h1>
 <% @user.orders.each do |order| %>
-    <%= link_to "Order #{order.id}", "/orders/#{order.id}"  %>
+    <%= link_to "Order #{order.id}", "/profile/orders/#{order.id}"  %>
     <%= order.name %>
     <%= order.address %>
     <%= order.city %>

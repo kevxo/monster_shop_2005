@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'On the user orders page' do
+RSpec.describe 'On the user orders show page' do
   before :each do
     @meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 
@@ -39,28 +39,33 @@ RSpec.describe 'On the user orders page' do
     click_on 'Submit'
   end
 
-  it 'it shows the order attributes' do
-    visit '/profile/orders'
+  it "I see all info for that order" do
+    visit "/profile/orders/#{@order_1.id}"
 
-    expect(page).to have_link("Order #{@order_1.id}")
+    expect(page).to have_content("Order #{@order_1.id}")
     expect(page).to have_content("Created On: #{@order_1.created_at.strftime("%m-%d-%Y")}")
     expect(page).to have_content("Updated On: #{@order_1.updated_at.strftime("%m-%d-%Y")}")
     expect(page).to have_content("#{@order_1.status}")
+
+    within "#item-#{@tire.id}" do
+      expect(page).to have_content(@tire.name)
+      expect(page).to have_content(@tire.description)
+      expect(page).to have_content("$#{@tire.price}")
+      expect(page).to have_content("2")
+      expect(page).to have_content("$200")
+      expect(page).to have_css("img[src*='#{@tire.image}']")
+    end
+
+    within "#item-#{@pull_toy.id}" do
+      expect(page).to have_content(@pull_toy.name)
+      expect(page).to have_content(@pull_toy.description)
+      expect(page).to have_content("$#{@pull_toy.price}")
+      expect(page).to have_content("3")
+      expect(page).to have_content("$30")
+      expect(page).to have_css("img[src*='#{@pull_toy.image}']")
+    end
+
     expect(page).to have_content("#{@order_1.total_quantity}")
     expect(page).to have_content("#{@order_1.grandtotal}")
-
-    expect(page).to have_link("Order #{@order_2.id}")
-    expect(page).to have_content("Created On: #{@order_2.created_at.strftime("%m-%d-%Y")}")
-    expect(page).to have_content("Updated On: #{@order_2.updated_at.strftime("%m-%d-%Y")}")
-    expect(page).to have_content("#{@order_2.status}")
-    expect(page).to have_content("#{@order_2.total_quantity}")
-    expect(page).to have_content("#{@order_2.grandtotal}")
-  end
-
-  it 'I can click on the order id and be routed to order show page' do
-    visit '/profile/orders'
-
-    click_link "Order #{@order_1.id}"
-    expect(current_path).to eq("/profile/orders/#{@order_1.id}")
   end
 end

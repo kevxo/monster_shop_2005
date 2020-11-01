@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit'
   get '/profile/change_password', to: 'users#password_edit'
   get '/profile/orders', to: 'user_orders#index'
+  get '/profile/orders/:order_id', to: 'user_orders#show'
 end
