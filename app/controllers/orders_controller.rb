@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.create(order_params)
-    # order.update(user_id: current_user.id)
     if order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
