@@ -19,11 +19,11 @@ class Order < ApplicationRecord
   end
 
   def remove_quantity
-    #ASK ALEX 
+    #ASK ALEX
     items.each do |item|
-      remove = ItemOrder.find_by(item_id: item.id)
-      item.inventory -= remove.quantity
-      item.save
+      ordered = ItemOrder.find_by(item_id: item.id)
+      amount = item.inventory -= ordered.quantity
+      item.update_attributes(inventory: amount)
     end
   end
   #returns quantity to merchant
@@ -35,5 +35,9 @@ class Order < ApplicationRecord
     end
   end
 
-
+  def change_status
+    if item_orders.where(fulfilled: true).count == item_orders.count
+      update_attributes(status: "Packaged")
+    end
+  end
 end
