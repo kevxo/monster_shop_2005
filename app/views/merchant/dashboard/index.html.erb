@@ -9,12 +9,10 @@
   </ul>
 </section>
 
-<section id="order-item-info">
-  <% @merchant.item_orders do |order| %>
-
-    <p><%= order.created_at %></p>
-    <p><%= order.total_quantity %></p>
-    <p><%= order.total_value %></p>
-  <% end %>
+<section id="order-info-1">
+    <%= link_to "Order #{@merchant.orders_id}", "/merchant/orders/#{@merchant.orders_id}", method: :get  %>
+    <p>Created order on: <%= @merchant.order_creation %></p>
+    <p>Total Quantity: <%= @merchant.total_quantity %></p>
+    <p>Total Value: $<%= @merchant.total_value %></p>
 </section>
 
