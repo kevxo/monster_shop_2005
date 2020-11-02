@@ -169,5 +169,6 @@ RSpec.describe("New Order Page") do
     expect(current_path).to eq("/profile/orders")
     expect(page).to have_content("Order successfully created!")
     expect(page).to have_content("Cart: 0")
+
   end
 end
