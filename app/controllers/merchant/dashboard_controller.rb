@@ -3,4 +3,8 @@ class Merchant::DashboardController < Merchant::BaseController
     flash[:success] = 'Logged In!'
     @merchant = Merchant.find_by(id: current_user.merchant_id)
   end
+
+  def items_index
+    
+  end
 end
