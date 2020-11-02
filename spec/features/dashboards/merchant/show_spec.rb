@@ -61,11 +61,11 @@ RSpec.describe 'As a merchant employee' do
       click_on 'Submit'
 
       visit '/merchant'
-      within "#order-item-info" do
-        # expect(page).to have_link(item_order_1.order_id)
-        expect(page).to have_content(item_order_1.created_at)
-        expect(page).to have_content(item_order_1.total_quantity)
-        expect(page).to have_content(item_order_1.total_value)
+      within "#order-info-1" do
+        expect(page).to have_link("Order #{meg.orders_id}")
+        expect(page).to have_content("Created order on: #{meg.created_at}")
+        expect(page).to have_content("Total Quantity: #{meg.total_quantity}")
+        expect(page).to have_content("Total Value: $#{meg.total_value}")
       end
     end
   end
