@@ -26,4 +26,20 @@ class Merchant < ApplicationRecord
     item_orders.distinct.joins(:order).pluck(:city)
   end
 
+  def total_quantity
+    item_orders.sum(:quantity)
+  end
+
+  def total_value
+    item_orders.sum(:price)
+  end
+
+  def orders_id
+    item_orders.pluck(:order_id).first
+  end
+
+  def order_creation
+    item_orders.pluck(:created_at).first
+  end
+
 end
