@@ -91,7 +91,6 @@ RSpec.describe("Order Creation") do
         expect(page).to have_content("$#{@tire.price}")
         expect(page).to have_content("1")
         expect(page).to have_content("$100")
-        expect(@tire.inventory).to eq(10)
       end
 
       within "#item-#{@pencil.id}" do

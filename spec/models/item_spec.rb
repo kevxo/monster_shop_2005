@@ -133,17 +133,5 @@ describe Item, type: :model do
 
       expect(Item.least_popular).to eq(expected)
     end
-
-    it "#decrement_inventory" do
-      @tire.decrement_inventory
-
-      expect(@tire.inventory).to eq(10)
-    end
-      # xit "return_quantity" do
-      #   # require "pry"; binding.pry
-      #   @order_1.return_quantity
-      #
-      #   expect(@tire.inventory).to eq(12)
-      # end
   end
 end

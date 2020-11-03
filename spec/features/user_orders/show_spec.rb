@@ -93,6 +93,6 @@ RSpec.describe 'On the user orders show page' do
     click_link("Cancel Order")
     visit '/profile/orders'
 
-    expect(page).to have_content("Order Status: Cancelled")
+    expect(page).to have_content("Order Status: cancelled")
   end
 end
