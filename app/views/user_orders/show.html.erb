@@ -1,0 +1,26 @@
+<h2>Order Id <%= @order.id %></h2>
+
+<p>Created On: <%= @order.created_at.strftime("%m-%d-%Y")%></p>
+<p>Updated On: <%= @order.updated_at.strftime("%m-%d-%Y")%></p>
+<p>Order Status: <%= @order.status %></p>
+
+<% @order.items.each do |item| %>
+<section class = "grid-item" id = "item-<%=item.id%>">
+  <h4><%= item.name %></h4>
+  <%= image_tag(item.image, height: '1%') %>
+  <p><%= item.description %></p>
+  <p>Item Price: <%= number_to_currency(item.price)%></p>
+  <% @order.item_orders.each do |item_order| %>
+    <p>Item Quantity: <%= item_order.quantity %></p>
+    <p>Subtotal: <%= number_to_currency(item_order.subtotal)%></p>
+    <% end %>
+</section>
+<% end %>
+
+<p>Total Items Ordered: <%=
+   @order.total_quantity %></p>
+<p>Total Cost: <%=number_to_currency(@order.grandtotal)%></p>
+<% if @order.status != 'shipped' %>
+
+  <p><%= link_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></p>
+<% end %>
