@@ -95,4 +95,16 @@ RSpec.describe 'On the user orders show page' do
 
     expect(page).to have_content("Order Status: cancelled")
   end
+
+  it "If order is shipped, I cannot see a cancel button" do
+    order_3 = @user_1.orders.create!(name: 'Matt',
+                            address: '123 Matt Ave',
+                            city: 'Matt Town',
+                            state: 'FL',
+                            zip: 90909,
+                            status: 2)
+
+    visit "/profile/orders/#{order_3.id}"
+    expect(page).to_not have_link("Cancel Order")
+  end
 end

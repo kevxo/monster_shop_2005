@@ -31,7 +31,8 @@ RSpec.describe 'On the admin dashboard page' do
                             address: '123 Kevin Ave',
                             city: 'Kevin Town',
                             state: 'FL',
-                            zip: 90909)
+                            zip: 90909,
+                            status: 0)
 
     @tire = @meg.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
     @pull_toy = @meg.items.create!(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
@@ -60,4 +61,25 @@ RSpec.describe 'On the admin dashboard page' do
     expect("#{@order_2.id}").to appear_before("#{@order_1.id}")
   end
 
+  it "I can ship any packaged orders and user can no longer cancel it" do
+    visit '/admin'
+
+    within "#order-#{@order_2.id}" do
+      expect(page).to have_button("Ship Order")
+
+      click_button("Ship Order")
+      expect(current_path).to eq("/admin")
+    end
+
+    @order_2.reload
+    expect(@order_2.status).to eq("shipped")
+  end
+
+  it "I can't ship any orders without status of packaged" do
+    visit '/admin'
+
+    within "#order-#{@order_1.id}" do
+      expect(page).to_not have_button("Ship Order")
+    end
+  end
 end
