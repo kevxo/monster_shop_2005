@@ -8,7 +8,7 @@ RSpec.describe 'merchant index page', type: :feature do
     end
 
     it 'I can see a list of merchants in the system' do
-      
+
       visit "/merchants"
 
       expect(current_path).to eq('/merchants')
