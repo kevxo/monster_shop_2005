@@ -1,10 +1,4 @@
 class OrdersController < ApplicationController
-
-  def index
-    flash[:notice] = "Order successfully created!"
-    @orders = Order.all
-  end
-
   def new
 
   end
@@ -31,10 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
 
   def order_params
-    params.permit(:name, :address, :city, :state, :zip)
+    params[:user_id] = current_user.id
+    params.permit(:name, :address, :city, :state, :zip, :user_id)
   end
 end
