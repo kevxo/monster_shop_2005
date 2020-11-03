@@ -75,5 +75,46 @@ RSpec.describe 'As a admin' do
 
       expect(brian.items.pluck(:activation_status)).to eq(['Deactivated', 'Deactivated'])
     end
+
+    it "should see a 'enable' button next to any merchants who are disabled" do
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203, status: 'Disabled')
+      brian = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80_210, status: 'Disabled')
+      user_1 = User.create!(name: 'Grant',
+                            address: '124 Grant Ave.',
+                            city: 'Denver',
+                            state: 'CO',
+                            zip: 12_345,
+                            email: 'grant@coolguy.com',
+                            password: 'password',
+                            role: 2)
+      visit '/'
+
+      click_link 'Log In'
+
+      expect(current_path).to eq('/login')
+
+      fill_in :email, with: user_1.email
+      fill_in :password, with: user_1.password
+
+      click_on 'Submit'
+
+      visit '/admin/merchants'
+
+      within "#merchant-#{meg.id}" do
+        expect(page).to have_button('enable')
+        click_on 'enable'
+      end
+
+      expect(current_path).to eq("/admin/merchants")
+      expect(page).to have_content("Merchant #{meg.name} account is enabled.")
+
+      within "#merchant-#{brian.id}" do
+        expect(page).to have_button('enable')
+        click_on 'enable'
+      end
+
+      expect(current_path).to eq("/admin/merchants")
+      expect(page).to have_content("Merchant #{brian.name} account is enabled.")
+    end
   end
 end
