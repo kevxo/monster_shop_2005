@@ -14,6 +14,7 @@ class UserOrdersController < ApplicationController
   def update
     @user = User.find(session[:user_id])
     @order = @user.orders.find(params[:order_id])
+
     @order.return_quantity
 
     @order.update(status: 3)
