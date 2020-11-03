@@ -36,25 +36,13 @@ describe Order, type: :model do
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
     end
-    xit "remove_quantity" do
-      # require "pry"; binding.pry
-      @order_1.remove_quantity
-
-      expect(@tire.inventory).to eq(10)
-    end
-    xit "return_quantity" do
-      # require "pry"; binding.pry
-      @order_1.return_quantity
-
-      expect(@tire.inventory).to eq(12)
-    end
 
     it "change_status" do
       @item_order_1.update_attributes(fulfilled: true)
       @item_order_2.update_attributes(fulfilled: true)
 
       @order_1.change_status
-      expect(@order_1.status).to eq("Packaged")
+      expect(@order_1.status).to eq("packaged")
     end
   end
 end

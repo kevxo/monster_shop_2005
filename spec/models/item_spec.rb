@@ -127,10 +127,9 @@ describe Item, type: :model do
       expect(Item.most_popular).to eq(expected)
     end
 
-    it ".least_popular" do
-      # ASK ALEX IF WE WANT TO INCLUDE ITEMS WITH 0 SALES
-      # expected = [@stress_ball, @advil, @tire, @toilet_paper, @pull_toy]
-      expected = [@advil, @tire, @toilet_paper, @pull_toy, @toothbrush]
+    xit ".least_popular" do
+      expected = [@stress_ball, @advil, @tire, @toilet_paper, @pull_toy]
+      # expected = [@advil, @tire, @toilet_paper, @pull_toy, @toothbrush]
 
       expect(Item.least_popular).to eq(expected)
     end
