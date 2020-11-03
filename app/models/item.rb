@@ -12,7 +12,6 @@ class Item < ApplicationRecord
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
 
-
   def average_review
     reviews.average(:rating)
   end
@@ -43,16 +42,9 @@ class Item < ApplicationRecord
     .group(:id)
     .order("total_quantity ASC")
     .limit(5)
-
   end
 
   def subtotal
     price * quantity_purchased
-  end
-
-  def decrement_inventory
-    ordered = ItemOrder.find_by(item_id: self.id)
-    self.decrement(:inventory, by = ordered.quantity)
-    self.save
   end
 end

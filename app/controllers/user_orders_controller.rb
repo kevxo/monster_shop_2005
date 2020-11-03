@@ -16,7 +16,7 @@ class UserOrdersController < ApplicationController
     @order = @user.orders.find(params[:order_id])
     @order.return_quantity
 
-    @order.update(status: "Cancelled")
+    @order.update(status: 3)
     redirect_to "/profile"
     flash[:notice] = "You have successfully cancelled your order"
   end

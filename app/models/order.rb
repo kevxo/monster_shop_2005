@@ -6,36 +6,31 @@ class Order < ApplicationRecord
   has_many :items, through: :item_orders
   belongs_to :user
 
+  enum status: %w(packaged pending shipped cancelled)
+
   def grandtotal
     item_orders.sum('price * quantity')
   end
 
+  def return_quantity
+  items.each do |item|
+    returned = ItemOrder.find_by(item_id: item.id)
+    item.inventory += returned.quantity
+    item.save
+    end
+  end
+
   def total_quantity
-    if self.status == "Cancelled"
+    if self.status == "cancelled"
        0
     else
       item_orders.sum(:quantity)
     end
   end
 
-  def remove_quantity
-    items.each do |item|
-      require "pry"; binding.pry
-      item.decrement_inventory
-    end
-  end
-  #returns quantity to merchant
-  def return_quantity
-    items.each do |item|
-      returned = ItemOrder.find_by(item_id: item.id)
-      item.inventory += returned.quantity
-      item.save
-    end
-  end
-
   def change_status
     if item_orders.where(fulfilled: true).count == item_orders.count
-      update_attributes(status: "Packaged")
+      update_attributes(status: 0)
     end
   end
 end

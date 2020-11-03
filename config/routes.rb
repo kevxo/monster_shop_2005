@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
 
   get '/profile', to: 'users#show'
-  # get '/profile/orders', to: 'orders#index'
 
   # sessions
   get '/login', to: 'sessions#new'

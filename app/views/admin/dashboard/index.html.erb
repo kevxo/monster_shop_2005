@@ -1,0 +1,11 @@
+<h1>Welcome</h1>
+
+<h3>All Orders: </h3>
+
+<% @orders.each do |order| %>
+  <section id="order-<%= order.id %>">
+    <p><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></p>
+    <p>Order ID: <%= order.id %></p>
+    <p>Created On: <%= order.created_at.strftime("%m-%d-%Y")%></p>
+  </section>
+<% end %>
