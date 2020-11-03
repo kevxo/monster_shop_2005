@@ -1,0 +1,11 @@
+<h2>My Items</h2>
+
+<% @merchant.items.each do |item| %>
+  <%= item.name %>
+  <%= item.description %>
+  <%= item.price %>
+  <%= item.image %>
+  <%= item.status %>
+  <%= item.inventory %>
+  <%= link_to 'Deactivate Item', 'merchant/items/#{item.id}/update', method: :patch %>
+<% end %>
