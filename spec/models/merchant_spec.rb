@@ -127,5 +127,22 @@ describe Merchant, type: :model do
       meg.merchant_enabled
       expect(meg.status).to eq('Enabled')
     end
+
+    it 'activate_all_items' do
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203, status: 'Disabled')
+      tire = meg.items.create(name: 'Gatorskins', description: "They'll never pop!", price: 100, image: 'https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588', inventory: 12)
+      toilet_paper = meg.items.create!(name: "Toilet Paper", description: "Your butt will love it!", price: 21, image: "https://cdn.shopify.com/s/files/1/1320/9925/products/WGAC_ProductPhotos_2018Packaging_TransparentBG_DLSingleRoll_large.png?v=1578973373", inventory: 12)
+      order_1 = Order.create!(name: 'Matt', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17_033, status: "pending")
+      item_order_1 = order_1.item_orders.create!(item: tire, price: tire.price, quantity: 2)
+      item_order_2= order_1.item_orders.create!(item: toilet_paper, price: toilet_paper.price, quantity: 1)
+
+
+      meg.deactivate_items
+      meg.merchant_enabled
+      meg.activate_items
+
+      expect(tire.activation_status).to eq('Activated')
+      expect(toilet_paper.activation_status).to eq('Activated')
+    end
   end
 end
