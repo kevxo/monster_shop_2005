@@ -40,5 +40,32 @@ RSpec.describe "Merchant Items Index Page" do
       expect(current_path).to eq("/merchant/items")
       expect(page).to have_content("#{@chain.name} was deactivated.")
     end
+
+    it 'I can activate an inactive items' do
+      dog_bone = @merchant_1.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", activation_status: 'Deactivated', inventory: 21)
+      visit "merchant/items"
+
+      within "#item-#{@tire.id}" do
+        expect(page).to have_content(@tire.name)
+        expect(page).to have_content("Description: #{@tire.description}")
+        expect(page).to have_content(@tire.price)
+        expect(page).to have_css("img[src*='#{@tire.image}']")
+        expect(page).to have_content("Status: Active")
+        expect(page).to have_content("Inventory: #{@tire.inventory}")
+      end
+
+      within "#item-#{dog_bone.id}" do
+        expect(page).to have_content(dog_bone.name)
+        expect(page).to have_content("Description: #{dog_bone.description}")
+        expect(page).to have_content(dog_bone.price)
+        expect(page).to have_css("img[src*='#{dog_bone.image}']")
+        expect(page).to have_content("Status: Inactive")
+        expect(page).to have_content("Inventory: #{dog_bone.inventory}")
+        click_on 'Activate Item'
+        expect(page).to have_content("Status: Active")
+      end
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("#{dog_bone.name} was activated.")
+    end
   end
 end 
