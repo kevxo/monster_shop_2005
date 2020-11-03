@@ -42,14 +42,15 @@ class MerchantsController < ApplicationController
       @merchant.merchant_disabled
       flash[:notice] = "Merchant #{@merchant.name} account is disabled."
       @merchant.deactivate_items
+      @merchant.save
     elsif params[:commit] == 'enable'
       @merchant.merchant_enabled
       flash[:notice] = "Merchant #{@merchant.name} account is enabled."
+      @merchant.activate_items
+      @merchant.save
     end
 
-    @merchant.save
     redirect_to '/admin/merchants'
-    # require 'pry' ; binding.pry
   end
 
   def destroy
