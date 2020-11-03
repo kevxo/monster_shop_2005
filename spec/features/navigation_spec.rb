@@ -118,7 +118,8 @@ RSpec.describe 'Site Navigation' do
     end
     describe "As a logged in Merchant" do
       it "has all links a default user has along with a link to the merchang dashboard" do
-        user_1 = User.create!(name: 'Grant',
+        meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+        user_1 = meg.users.create!(name: 'Grant',
                           address: '124 Grant Ave.',
                           city: 'Denver',
                           state: 'CO',
@@ -236,7 +237,8 @@ RSpec.describe 'Site Navigation' do
     end
     describe "As a merchant user" do
       it "When trying to access /merchant and /admin" do
-        user_1 = User.create!(name: 'Grant',
+        meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+        user_1 = meg.users.create!(name: 'Grant',
                           address: '124 Grant Ave.',
                           city: 'Denver',
                           state: 'CO',
@@ -294,7 +296,8 @@ RSpec.describe 'Site Navigation' do
 
     describe 'As a Logged In Merchant' do
     it "I see a nav bar with links to all pages except login and register" do
-      user_1 = User.create!(name: 'Hanna',
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+      user_1 = meg.users.create!(name: 'Hanna',
                         address: '124 Hanna Ave.',
                         city: 'Denver',
                         state: 'CO',

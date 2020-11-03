@@ -48,11 +48,13 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
+    get '/items', to: 'dashboard#items_index'
   end
 
   namespace :admin do
     get '/', to: 'dashboard#index'
     patch '/orders/:order_id', to: 'orders#update'
+    get '/merchants/:id', to: 'dashboard#index'
   end
 
   get '/profile', to: 'users#show'
