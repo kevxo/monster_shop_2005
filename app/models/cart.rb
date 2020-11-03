@@ -12,6 +12,7 @@ class Cart
 
   def add_quantity(item, quantity = '1')
     integer = quantity.to_i
+    @contents[item] = 0 if !@contents[item]
     @contents[item] += integer
   end
 
