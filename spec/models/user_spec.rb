@@ -12,6 +12,11 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
   end
 
+
+  describe 'relationships' do
+    it {should belong_to(:merchant).optional}
+  end
+
   describe 'roles' do
     it 'can be created as a default user.' do
       user_1 = User.create!(name: 'Grant',
@@ -28,7 +33,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'can be a merchant' do
-      user_1 = User.create!(name: 'Grant',
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+      user_1 = meg.users.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
                             state: 'CO',

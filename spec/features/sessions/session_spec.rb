@@ -25,7 +25,8 @@ RSpec.describe 'Logging in' do
 
   describe 'As a merchant user' do
     it 'can login with valid credentials' do
-      user_1 = User.create!(name: 'Grant',
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+      user_1 = meg.users.create!(name: 'Grant',
                             address: '124 Grant Ave.',
                             city: 'Denver',
                             state: 'CO',
@@ -116,7 +117,8 @@ RSpec.describe 'Logging in' do
     end
     describe 'As a merchant user' do
       it "redirects user to merchant dashboard page" do
-        user_1 = User.create!(name: 'Grant',
+        meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+        user_1 = meg.users.create!(name: 'Grant',
                               address: '124 Grant Ave.',
                               city: 'Denver',
                               state: 'CO',
