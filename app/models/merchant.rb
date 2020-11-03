@@ -50,4 +50,7 @@ class Merchant < ApplicationRecord
     self.items.update(activation_status: 'Deactivated')
   end
 
+  def merchant_enabled
+    self.status = "Enabled"
+  end
 end
