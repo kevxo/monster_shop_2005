@@ -19,11 +19,9 @@ class Order < ApplicationRecord
   end
 
   def remove_quantity
-    #ASK ALEX
     items.each do |item|
-      ordered = ItemOrder.find_by(item_id: item.id)
-      amount = item.inventory -= ordered.quantity
-      item.update_attributes(inventory: amount)
+      require "pry"; binding.pry
+      item.decrement_inventory
     end
   end
   #returns quantity to merchant

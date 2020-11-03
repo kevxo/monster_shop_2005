@@ -16,7 +16,7 @@ RSpec.describe "Items Index Page" do
       @stress_ball = @meg.items.create!(name: "Stress Ball", description: "Squeeze the shit outta this", price: 40, image: "https://www.discountmugs.com/product-images/colors/stress014-pu-stress-ball-stress014-yellow.jpg", inventory: 191)
 
       @user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
-      
+
       @order_1 = @user_1.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
       @order_2 = @user_1.orders.create!(name: 'Kevin', address: '123 Kevin Ave', city: 'Kevin Town', state: 'FL', zip: 90909)
 
@@ -38,9 +38,6 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_link(@tire.merchant.name)
       expect(page).to have_link(@pull_toy.name)
       expect(page).to have_link(@pull_toy.merchant.name)
-      #ASK ALEX ABOUT THIS
-      # expect(page).to have_link(@dog_bone.name)
-      # expect(page).to have_link(@dog_bone.merchant.name)
     end
 
     it "I can see a list of all of the items "do
@@ -66,16 +63,6 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@pull_toy.image}']")
       end
-      #ASK ALEX ABOUT THIS
-      # within "#item-#{@dog_bone.id}" do
-      #   expect(page).to have_link(@dog_bone.name)
-      #   expect(page).to have_content(@dog_bone.description)
-      #   expect(page).to have_content("Price: $#{@dog_bone.price}")
-      #   expect(page).to have_content("Inactive")
-      #   expect(page).to have_content("Inventory: #{@dog_bone.inventory}")
-      #   expect(page).to have_link(@brian.name)
-      #   expect(page).to have_css("img[src*='#{@dog_bone.image}']")
-      # end
     end
 
     it "any user can visit the index page and see all items that are not disabled" do
@@ -95,15 +82,6 @@ RSpec.describe "Items Index Page" do
     end
 
     it "any user sees an area with stats for 5 most popular items and 5 least popular items" do
-      # ItemOrder.create!({item_id: @tire.id, order_id: })
-      # @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-      #
-      # @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 20)
-      # @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
-      # @order_1.item_orders.create!(item: @toilet_paper, price: @pull_toy.price, quantity: 1)
-      # @order_1.item_orders.create!(item: @toothbrush, price: @pull_toy.price, quantity: 12)
-      # @order_1.item_orders.create!(item: @candle, price: @pull_toy.price, quantity: 31)
-      # Item.most_popular
       visit '/items'
 
       expect(page).to have_content("Item Statistics")

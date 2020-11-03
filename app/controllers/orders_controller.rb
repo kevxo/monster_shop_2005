@@ -19,11 +19,12 @@ class OrdersController < ApplicationController
       end
       session.delete(:cart)
       redirect_to "/profile/orders"
+      order.remove_quantity
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
-    order.remove_quantity
+
   end
 
   private

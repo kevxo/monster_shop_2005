@@ -43,9 +43,16 @@ class Item < ApplicationRecord
     .group(:id)
     .order("total_quantity ASC")
     .limit(5)
+
   end
 
   def subtotal
     price * quantity_purchased
+  end
+
+  def decrement_inventory
+    ordered = ItemOrder.find_by(item_id: self.id)
+    self.decrement(:inventory, by = ordered.quantity)
+    self.save
   end
 end
