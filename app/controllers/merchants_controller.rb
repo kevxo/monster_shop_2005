@@ -38,8 +38,13 @@ class MerchantsController < ApplicationController
 
   def admin_update_merchant
     @merchant = Merchant.find(params[:id])
-    @merchant.status = 'Disabled'
-    flash[:notice] = "Merchant #{@merchant.name} account is disabled."
+    if params[:commit] == 'disable'
+      @merchant.merchant_disabled
+      flash[:notice] = "Merchant #{@merchant.name} account is disabled."
+      @merchant.deactivate_items
+    end
+
+    @merchant.save
     redirect_to '/admin/merchants'
     # require 'pry' ; binding.pry
   end
