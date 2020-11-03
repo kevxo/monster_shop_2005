@@ -12,7 +12,7 @@
       <p><%= @item.description %></p>
       <p>Price: <%= number_to_currency(@item.price )%> </p>
       <p>Inventory: <%= @item.inventory %> </p>
-      <% if @item.active? %>
+      <% if @item.activation_status == 'Activated'%>
         <p style= "color:green">Active</p>
       <% else %>
         <p style= "color:red">Inactive</p>
