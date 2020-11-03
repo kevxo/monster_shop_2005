@@ -119,5 +119,13 @@ describe Merchant, type: :model do
       expect(toilet_paper.activation_status).to eq('Deactivated')
 
     end
+
+
+    it 'merchant_enabled' do
+      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203, status: 'Disabled')
+
+      meg.merchant_enabled
+      expect(meg.status).to eq('Enabled')
+    end
   end
 end
