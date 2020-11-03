@@ -8,10 +8,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = Order.create(order_params)
-    if order.save
+    @order = Order.create(order_params)
+    if @order.save
       cart.items.each do |item,quantity|
-        order.item_orders.create({
+        @order.item_orders.create({
           item: item,
           quantity: quantity,
           price: item.price
@@ -19,12 +19,13 @@ class OrdersController < ApplicationController
       end
       session.delete(:cart)
       redirect_to "/profile/orders"
-      order.remove_quantity
+     #  item_order = ItemOrder.find_by(order_id: order.id)
+     # order.items.each do |item|
+     #   item.decrement_inventory(item_order.quantity)
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
-
   end
 
   private

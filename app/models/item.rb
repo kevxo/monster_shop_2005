@@ -50,9 +50,16 @@ class Item < ApplicationRecord
     price * quantity_purchased
   end
 
-  def decrement_inventory
-    ordered = ItemOrder.find_by(item_id: self.id)
-    self.decrement(:inventory, by = ordered.quantity)
-    self.save
-  end
+#   def decrement_inventory
+#     ordered = ItemOrder.find_by(item_id: self.id)
+#     # self.decrement!(:inventory, by = ordered.quantity)
+#     self.update_attributes(inventory: self.inventory -= ordered.quantity)
+#   end
+#
+#   def decrement_inventory(io_quantity)
+#   decrement!(:inventory, by = io_quantity)
+#   self.save
+# end
+
+
 end

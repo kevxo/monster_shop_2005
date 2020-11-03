@@ -20,12 +20,11 @@ class Order < ApplicationRecord
 
   def remove_quantity
     items.each do |item|
-      require "pry"; binding.pry
       item.decrement_inventory
     end
   end
   #returns quantity to merchant
-  def return_quantity
+  def return_inventory
     items.each do |item|
       returned = ItemOrder.find_by(item_id: item.id)
       item.inventory += returned.quantity
