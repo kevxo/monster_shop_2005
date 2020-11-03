@@ -20,5 +20,7 @@
 <p>Total Items Ordered: <%=
    @order.total_quantity %></p>
 <p>Total Cost: <%=number_to_currency(@order.grandtotal)%></p>
+<% if @order.status != 'shipped' %>
 
-<p><%= link_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></p>
+  <p><%= link_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></p>
+<% end %>
