@@ -11,6 +11,12 @@
                 <%= submit_tag 'disable' %>
               <% end %>
             </section>
+          <% elsif merchant.status == 'Disabled' %>
+              <section id="merchant-<%= merchant.id %>">
+                <%= form_tag "/admin/merchants/#{merchant.id}", method: :patch do %>
+                  <%= submit_tag 'enable' %>
+                <% end %>
+              </section>
           <% end %>
         <% else %>
           <h2><%=link_to merchant.name, "/merchants/#{merchant.id}"%></h2>
