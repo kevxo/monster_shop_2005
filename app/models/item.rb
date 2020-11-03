@@ -44,4 +44,8 @@ class Item < ApplicationRecord
     .order("total_quantity ASC")
     .limit(5)
   end
+
+  def subtotal
+    price * quantity_purchased
+  end
 end

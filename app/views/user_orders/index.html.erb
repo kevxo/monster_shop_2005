@@ -1,14 +1,14 @@
 <h1>My Orders</h1>
 <% @user.orders.each do |order| %>
-    <%= link_to "Order #{order.id}", "/orders/#{order.id}"  %>
-    <%= order.name %>
-    <%= order.address %>
-    <%= order.city %>
-    <%= order.state %>
-    <%= order.zip %>
-    <%= order.status %>
+    <%= link_to "Order #{order.id}", "/profile/orders/#{order.id}"  %><br>
+    <%= order.name %><br>
+    <%= order.address %><br>
+    <%= order.city %><br>
+    <%= order.state %><br>
+    <%= order.zip %><br>
+    <p>Order Status: <%= order.status %></p><br>
     <p>Created On: <%= order.created_at.strftime("%m-%d-%Y")%></p>
     <p>Updated On: <%= order.updated_at.strftime("%m-%d-%Y")%></p>
     <p>Total Items Ordered: <%= order.total_quantity %></p>
-    <p>Grand Total: <%= order.grandtotal %></p>
+    <p>Grand Total: <%=number_to_currency(order.grandtotal)%></p>
 <% end %>

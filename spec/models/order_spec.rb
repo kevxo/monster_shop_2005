@@ -27,17 +27,34 @@ describe Order, type: :model do
 
       @order_1 = @user_1.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
 
-      @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
-      @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
+      @item_order_1 = @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+      @item_order_2 = @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
     it 'grandtotal' do
       expect(@order_1.grandtotal).to eq(230)
     end
-    it 'default_status' do
-      expect(@order_1.default_status).to eq("pending")
-    end
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
+    end
+    xit "remove_quantity" do
+      # require "pry"; binding.pry
+      @order_1.remove_quantity
+
+      expect(@tire.inventory).to eq(10)
+    end
+    xit "return_quantity" do
+      # require "pry"; binding.pry
+      @order_1.return_quantity
+
+      expect(@tire.inventory).to eq(12)
+    end
+
+    it "change_status" do
+      @item_order_1.update_attributes(fulfilled: true)
+      @item_order_2.update_attributes(fulfilled: true)
+
+      @order_1.change_status
+      expect(@order_1.status).to eq("Packaged")
     end
   end
 end

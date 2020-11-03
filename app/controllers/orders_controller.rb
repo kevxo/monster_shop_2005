@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
+    order.remove_quantity
   end
 
   private
