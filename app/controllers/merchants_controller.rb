@@ -42,6 +42,9 @@ class MerchantsController < ApplicationController
       @merchant.merchant_disabled
       flash[:notice] = "Merchant #{@merchant.name} account is disabled."
       @merchant.deactivate_items
+    elsif params[:commit] == 'enable'
+      @merchant.merchant_enabled
+      flash[:notice] = "Merchant #{@merchant.name} account is enabled."
     end
 
     @merchant.save
