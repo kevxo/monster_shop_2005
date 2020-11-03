@@ -42,4 +42,12 @@ class Merchant < ApplicationRecord
     item_orders.pluck(:created_at).first
   end
 
+  def merchant_disabled
+    self.status = "Disabled"
+  end
+
+  def deactivate_items
+    self.items.update(activation_status: 'Deactivated')
+  end
+
 end
