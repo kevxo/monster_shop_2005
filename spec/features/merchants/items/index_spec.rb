@@ -17,7 +17,7 @@ RSpec.describe "Merchant Items Index Page" do
 
     it 'I can deactivate active items' do
       visit "merchant/items"
-save_and_open_page
+
       within "#item-#{@tire.id}" do
         expect(page).to have_content(@tire.name)
         expect(page).to have_content("Description: #{@tire.description}")
@@ -35,10 +35,10 @@ save_and_open_page
         expect(page).to have_content("Status: Active")
         expect(page).to have_content("Inventory: #{@chain.inventory}")
         click_on 'Deactivate Item'
-        expect(current_path).to eq("/merchant/items")
-        expect(page).to have_content("Item was deactivated.")
         expect(page).to have_content("Status: Inactive")
       end
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("#{@chain.name} was deactivated.")
     end
   end
 end 
