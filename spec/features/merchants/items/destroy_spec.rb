@@ -15,34 +15,32 @@ RSpec.describe "Merchant Items Index Page" do
       click_on 'Submit'
     end
 
-    it 'I can see all of the merchant items' do
+    it 'I can delete an item' do
+      dog_bone = @merchant_1.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", activation_status: 'Deactivated', inventory: 21)
+      visit "merchant/items"
+
+      within "#item-#{dog_bone.id}" do
+        expect(page).to have_content(dog_bone.name)
+        expect(page).to have_content("Description: #{dog_bone.description}")
+        expect(page).to have_content(dog_bone.price)
+        expect(page).to have_css("img[src*='#{dog_bone.image}']")
+        expect(page).to have_content("Status: Inactive")
+        expect(page).to have_content("Inventory: #{dog_bone.inventory}")
+        click_on 'Delete Item'
+      end
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("#{dog_bone.name} was deleted.")
+      expect(page).to_not have_content(dog_bone.description)
+    end
+
+    it 'I can not delete an item if it has ever been ordered' do
+      order_1 = @user_1.orders.create!(name: 'Kevin', address: '123 Kevin Ave', city: 'Kevin Town', state: 'FL', zip: 90909)
+      order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       visit "merchant/items"
 
       within "#item-#{@tire.id}" do
-        expect(page).to have_content(@tire.name)
-        expect(page).to have_content("Description: #{@tire.description}")
-        expect(page).to have_content(@tire.price)
-        expect(page).to have_css("img[src*='#{@tire.image}']")
-        expect(page).to have_content("Status: Active")
-        expect(page).to have_content("Inventory: #{@tire.inventory}")
-      end
-
-      within "#item-#{@chain.id}" do
-        expect(page).to have_content(@chain.name)
-        expect(page).to have_content("Description: #{@chain.description}")
-        expect(page).to have_content(@chain.price)
-        expect(page).to have_css("img[src*='#{@chain.image}']")
-        expect(page).to have_content("Status: Active")
-        expect(page).to have_content("Inventory: #{@chain.inventory}")
+        expect(page).to_not have_content("Delete Item")
       end
     end
-
-    it 'I can see a link to add a new item' do
-      visit "merchant/items"
-
-      expect(page).to have_link("Add Item")
-      click_link 'Add Item'
-      expect(current_path).to eq("/merchant/items/new")
-    end
-  end
-end 
+  end 
+end

@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2020_11_03_034224) do
     t.string "description"
     t.integer "price"
     t.string "image"
-    t.boolean "active?", default: true
     t.integer "inventory"
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
