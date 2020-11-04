@@ -57,7 +57,7 @@ RSpec.describe 'As a merchant employee' do
         visit '/merchants'
 
         click_link "Meg's Bike Shop"
-        
+
         expect(current_path).to eq("/admin/merchants/#{meg.id}")
       end
     end
