@@ -104,13 +104,6 @@ describe Merchant, type: :model do
       expect(meg.order_creation).to eq(item_order_1.created_at)
     end
 
-    it 'merchant_disabled' do
-      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
-
-      meg.merchant_disabled
-      expect(meg.status).to eq('Disabled')
-    end
-
     it 'deactivate_all_items' do
       user_1 = User.create!(name: 'Grant',
                             address: '124 Grant Ave.',
@@ -128,18 +121,11 @@ describe Merchant, type: :model do
       item_order_1 = order_1.item_orders.create!(item: tire, price: tire.price, quantity: 2)
       item_order_2 = order_1.item_orders.create!(item: toilet_paper, price: toilet_paper.price, quantity: 1)
 
-      meg.merchant_disabled
+      meg.update(status: "Deactivated")
       meg.deactivate_items
 
       expect(tire.activation_status).to eq('Deactivated')
       expect(toilet_paper.activation_status).to eq('Deactivated')
-    end
-
-    it 'merchant_enabled' do
-      meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203, status: 'Disabled')
-
-      meg.merchant_enabled
-      expect(meg.status).to eq('Enabled')
     end
 
     it 'activate_all_items' do
@@ -160,7 +146,7 @@ describe Merchant, type: :model do
       item_order_2 = order_1.item_orders.create!(item: toilet_paper, price: toilet_paper.price, quantity: 1)
 
       meg.deactivate_items
-      meg.merchant_enabled
+      meg.update(status: "Activated")
       meg.activate_items
 
       expect(tire.activation_status).to eq('Activated')
