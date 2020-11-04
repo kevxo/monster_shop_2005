@@ -31,5 +31,17 @@ RSpec.describe "Merchant Items New Page" do
       expect(page).to have_content(item.description)
       expect(item.activation_status).to eq("Activated")
     end
+
+    it 'Returns default image if no image entered' do
+      visit 'merchant/items/new'
+
+      fill_in :name, with: "Bike Backpack"
+      fill_in :description, with: "Black and Yellow"
+      fill_in :inventory, with: 100
+      fill_in :price, with: 40
+      click_on 'Submit'
+      item = Item.last
+      expect(page).to have_css("img[src*='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png']")
+    end
   end 
 end 
