@@ -26,7 +26,6 @@ RSpec.describe "Merchant Items New Page" do
       click_on 'Submit'
       item = Item.last
 
-      
       expect(current_path).to eq("/merchant/items")
       expect(page).to have_content("#{item.name} has been added.")
       expect(page).to have_content(item.description)
