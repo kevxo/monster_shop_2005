@@ -7,10 +7,11 @@ class Item < ApplicationRecord
   validates_presence_of :name,
                         :description,
                         :price,
-                        :image,
                         :inventory,
                         :activation_status
   validates_numericality_of :price, greater_than: 0
+  validates_numericality_of :inventory, greater_than: 0
+  validates_presence_of :image, allow_blank: true
 
   def average_review
     reviews.average(:rating)
