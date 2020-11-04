@@ -12,7 +12,7 @@ class Merchant::ItemsController < Merchant::BaseController
     else
       item.update(activation_status: 'Deactivated')
       flash[:success] = "#{item.name} was deactivated."
-    end 
+    end
       redirect_to '/merchant/items'
   end
 
@@ -20,9 +20,14 @@ class Merchant::ItemsController < Merchant::BaseController
 
   def create
     @merchant = Merchant.find_by(id: current_user.merchant_id)
-    item = @merchant.items.create(item_params)
-    redirect_to '/merchant/items'
-    flash[:success] = "#{item.name} has been added."
+    @item = @merchant.items.create(item_params)
+    if @item.save
+      redirect_to '/merchant/items'
+      flash[:success] = "#{@item.name} has been added."
+    else
+      flash[:error] = @item.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def destroy
