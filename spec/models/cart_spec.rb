@@ -47,5 +47,30 @@ RSpec.describe Cart do
       expect(@cart.subtotal(@ogre)).to eq(20)
       expect(@cart.subtotal(@giant)).to eq(100)
     end
+
+    it '.add_quantity()' do
+      brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      hippo = brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', inventory: 3 )
+      @cart.add_quantity(hippo.id.to_s, '3')
+
+      expect(@cart.contents).to eq({
+        @ogre.id.to_s => 1,
+        @giant.id.to_s => 2,
+        hippo.id.to_s => 3
+        })
+    end
+
+    it '.minus_quantity' do
+      brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      hippo = brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', inventory: 3 )
+      @cart.add_quantity(hippo.id.to_s, '3')
+      @cart.minus_quantity(hippo.id.to_s, '2')
+
+      expect(@cart.contents).to eq({
+        @ogre.id.to_s => 1,
+        @giant.id.to_s => 2,
+        hippo.id.to_s => 1
+        })
+    end
   end
 end
