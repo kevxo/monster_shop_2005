@@ -63,6 +63,7 @@ RSpec.describe "Merchant Items New Page" do
 
       expect(page).to have_content("Name can't be blank")
       expect(page).to have_content("Inventory can't be blank")
+
       expect(find_field(:name).value).to eq("")
       expect(find_field(:price).value).to eq("18")
       expect(find_field(:description).value).to eq("No more chaffin'!")

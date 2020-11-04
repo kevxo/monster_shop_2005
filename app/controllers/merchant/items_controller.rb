@@ -3,19 +3,6 @@ class Merchant::ItemsController < Merchant::BaseController
     @merchant = Merchant.find_by(id: current_user.merchant_id)
   end
 
-  def update
-    @merchant = Merchant.find_by(id: current_user.merchant_id)
-    item = Item.find(params[:item_id])
-    if item.activation_status == 'Deactivated'
-      item.update(activation_status: 'Activated')
-      flash[:success] = "#{item.name} was activated."
-    else
-      item.update(activation_status: 'Deactivated')
-      flash[:success] = "#{item.name} was deactivated."
-    end
-      redirect_to '/merchant/items'
-  end
-
   def new;end
 
   def create
@@ -29,6 +16,37 @@ class Merchant::ItemsController < Merchant::BaseController
       render :new
     end
   end
+  def change_status
+    @merchant = Merchant.find_by(id: current_user.merchant_id)
+    item = Item.find(params[:item_id])
+    if item.activation_status == 'Deactivated'
+      item.update(activation_status: 'Activated')
+      flash[:success] = "#{item.name} was activated."
+    else
+      item.update(activation_status: 'Deactivated')
+      flash[:success] = "#{item.name} was deactivated."
+    end
+    redirect_to '/merchant/items'
+  end
+
+  def edit
+    @merchant = Merchant.find_by(id: current_user.merchant_id)
+    @item = @merchant.items.find(params[:item_id])
+  end
+
+  def update
+    @merchant = Merchant.find_by(id: current_user.merchant_id)
+    @item = @merchant.items.find(params[:item_id])
+    @item.update(item_params)
+    if @item.save
+      flash[:success] = "#{@item.name} has been updated."
+      redirect_to "/merchant/items"
+    else
+      flash[:error] = @item.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
 
   def destroy
     @merchant = Merchant.find_by(id: current_user.merchant_id)
