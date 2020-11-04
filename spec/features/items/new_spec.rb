@@ -41,7 +41,7 @@ RSpec.describe "Create Merchant Items" do
       expect(new_item.description).to eq(description)
       expect(new_item.image).to eq(image_url)
       expect(new_item.inventory).to eq(inventory)
-      expect(Item.last.active?).to be(true)
+      expect(Item.last.activation_status).to eq('Activated')
       expect("#item-#{Item.last.id}").to be_present
       expect(page).to have_content(name)
       expect(page).to have_content("Price: $#{new_item.price}")
@@ -70,7 +70,8 @@ RSpec.describe "Create Merchant Items" do
 
       click_button "Create Item"
 
-      expect(page).to have_content("Name can't be blank and Inventory can't be blank")
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Inventory can't be blank")
       expect(page).to have_button("Create Item")
     end
   end

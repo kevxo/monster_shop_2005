@@ -7,7 +7,7 @@
 <% @order.items.each do |item| %>
 <section class = "grid-item" id = "item-<%=item.id%>">
   <h4><%= item.name %></h4>
-  <%= image_tag(item.image, height: '1%') %>
+  <%= image_tag(item.image) %>
   <p><%= item.description %></p>
   <p>Item Price: <%= number_to_currency(item.price)%></p>
   <% @order.item_orders.each do |item_order| %>

@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  before_save :default_picture
   belongs_to :merchant
   has_many :reviews, dependent: :destroy
   has_many :item_orders
@@ -7,10 +8,15 @@ class Item < ApplicationRecord
   validates_presence_of :name,
                         :description,
                         :price,
-                        :image,
-                        :inventory
-  validates_inclusion_of :active?, :in => [true, false]
+                        :inventory,
+                        :activation_status
   validates_numericality_of :price, greater_than: 0
+  validates_numericality_of :inventory, greater_than: 0
+  validates_presence_of :image, allow_blank: true
+
+  def default_picture
+    self.image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png' if self.image == ''
+  end
 
   def average_review
     reviews.average(:rating)

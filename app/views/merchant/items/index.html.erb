@@ -1,0 +1,29 @@
+<h2>My Items</h2>
+<%= link_to 'Add Item', '/merchant/items/new', method: :get %>
+<% @merchant.items.each do |item| %>
+<section id="item-<%= item.id %>">
+<p>Name: <%= item.name %></p>
+<p>Description: <%= item.description %></p>
+<p>Price: <%= number_to_currency(item.price) %></p>
+  <%= image_tag(item.image) %>
+  <% if item.activation_status == 'Activated' %>
+    <p>Status: Active</p>
+  <% else %>
+    <p>Status: Inactive</p>
+  <% end %>
+<p>Inventory: <%= item.inventory %></p>
+<% if item.activation_status == 'Activated' %>
+  <%= link_to 'Deactivate Item', "/merchant/items/#{item.id}", method: :patch %>
+<% else %>
+  <%= link_to 'Activate Item', "/merchant/items/#{item.id}", method: :patch %>
+<% end %>
+
+<%= link_to 'Edit Item', "/merchant/items/#{item.id}/edit", method: :get %>
+
+<% if item.item_orders.empty? %>
+  <%= link_to 'Delete Item', "/merchant/items/#{item.id}", method: :delete %>
+<% end%>
+</section>
+<% end %>
+<br>
+<br>

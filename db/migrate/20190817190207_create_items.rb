@@ -5,7 +5,6 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.string :description
       t.integer :price
       t.string :image
-      t.boolean :active?, default: true
       t.integer :inventory
       t.references :merchant, foreign_key: true
 
