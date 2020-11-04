@@ -8,8 +8,8 @@ class Item < ApplicationRecord
                         :description,
                         :price,
                         :image,
-                        :inventory
-  validates_inclusion_of :active?, :in => [true, false]
+                        :inventory,
+                        :activation_status
   validates_numericality_of :price, greater_than: 0
 
   def average_review
