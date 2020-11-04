@@ -36,23 +36,6 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def admin_update_merchant
-    @merchant = Merchant.find(params[:id])
-    if params[:commit] == 'disable'
-      @merchant.merchant_disabled
-      flash[:notice] = "Merchant #{@merchant.name} account is disabled."
-      @merchant.deactivate_items
-      @merchant.save
-    elsif params[:commit] == 'enable'
-      @merchant.merchant_enabled
-      flash[:notice] = "Merchant #{@merchant.name} account is enabled."
-      @merchant.activate_items
-      @merchant.save
-    end
-
-    redirect_to '/admin/merchants'
-  end
-
   def destroy
     Merchant.destroy(params[:id])
     redirect_to '/merchants'
