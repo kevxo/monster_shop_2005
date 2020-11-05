@@ -21,7 +21,6 @@ Rails.application.routes.draw do
 
   get '/items/:item_id/reviews/new', to: 'reviews#new'
   post '/items/:item_id/reviews', to: 'reviews#create'
-
   get '/reviews/:id/edit', to: 'reviews#edit'
   patch '/reviews/:id', to: 'reviews#update'
   delete '/reviews/:id', to: 'reviews#destroy'
@@ -56,6 +55,9 @@ Rails.application.routes.draw do
     patch '/items/:item_id/edit', to: 'items#update'
     delete '/items/:item_id', to: 'items#destroy'
   end
+
+  get 'merchant/orders/:id', to: 'orders#show'
+  patch "merchant/orders/:id", to: 'orders#update'
 
   namespace :admin do
     get '/', to: 'dashboard#index'
