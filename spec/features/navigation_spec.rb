@@ -226,6 +226,7 @@ RSpec.describe 'Site Navigation' do
 
         click_on "Submit"
 
+        expect(page).to_not have_content("All Users")
         visit "/merchant"
 
         expect(page).to have_content("The page you were looking for doesn't exist (404)")
@@ -233,6 +234,7 @@ RSpec.describe 'Site Navigation' do
         visit "/admin"
 
         expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
       end
     end
     describe "As a merchant user" do

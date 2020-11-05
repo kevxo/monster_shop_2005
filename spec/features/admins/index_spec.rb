@@ -82,4 +82,10 @@ RSpec.describe 'On the admin dashboard page' do
       expect(page).to_not have_button("Ship Order")
     end
   end
+
+  it "I can click the users nav link and am taken to admin users index page" do
+    click_on "All Users"
+
+    expect(current_path).to eq("/admin/users")
+  end
 end
