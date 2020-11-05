@@ -2,9 +2,9 @@ class CartController < ApplicationController
   before_action :reject_admin
 
   def reject_admin
-    return unless current_admin?
-
-    render file: '/public/404'
+    if current_admin?
+      render file: '/public/404'
+    end
   end
 
   def add_item
