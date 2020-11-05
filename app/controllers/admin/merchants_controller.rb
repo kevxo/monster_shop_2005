@@ -7,6 +7,7 @@ class Admin::MerchantsController < Admin::BaseController
   def show
     @admin = User.find(session[:user_id])
     @merchant = Merchant.find(params[:id])
+    @order =  Order.find(@merchant.item_orders.pluck(:order_id))
   end
 
   def update

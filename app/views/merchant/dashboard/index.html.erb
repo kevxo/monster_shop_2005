@@ -11,9 +11,14 @@
 
 <%= link_to "My Items", "/merchant/items" %>
 
-<section id="order-info-1">
-    <%= link_to "Order #{@merchant.orders_id}", "/merchant/orders/#{@merchant.orders_id}", method: :get  %>
-    <p>Created order on: <%= @merchant.order_creation %></p>
-    <p>Total Quantity: <%= @merchant.total_quantity %></p>
-    <p>Total Value: <%= number_to_currency(@merchant.total_value) %></p>
-</section>
+
+<% @order.each do |ord| %>
+  <section id="order-info-<%= ord.id %>">
+    <% if ord.status == 'pending' %>
+      <%= link_to "Order #{ord.id}", "/merchant/orders/#{ord.id}", method: :get  %>
+      <p>Created order on: <%= ord.created_at %></p>
+      <p>Total Quantity: <%= ord.total_quantity %></p>
+      <p>Total Value: <%= number_to_currency(ord.grandtotal) %></p>
+    <% end %>
+  </section>
+  <% end %>
