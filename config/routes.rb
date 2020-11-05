@@ -72,9 +72,10 @@ Rails.application.routes.draw do
   end
 
   get '/profile', to: 'users#show'
-  patch '/profile', to: 'users#update'
   get '/profile/edit', to: 'users#edit'
+  patch '/profile', to: 'users#update'
   get '/profile/change_password', to: 'users#password_edit'
+  patch '/profile/change_password', to: 'users#update_password'
   get '/profile/orders', to: 'user_orders#index'
   get '/profile/orders/:order_id', to: 'user_orders#show'
   patch '/profile/orders/:order_id', to: 'user_orders#update'

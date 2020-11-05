@@ -1,6 +1,7 @@
 class Admin::DashboardController < Admin::BaseController
   def index
-    flash[:success] = 'Logged In!'
+    @user = User.find(session[:user_id])
     @orders = Order.order(:status)
+    flash[:success] = "Logged in as #{@user.name}"
   end
 end
