@@ -5,11 +5,11 @@ class Merchant::OrdersController < Merchant::BaseController
   end
 
   def update
-    @item = Item.find(params[:id])
-    @item_order = ItemOrder.find_by(item_id: params[:id])
-    @item.fill_status = "Fulfilled"
-    @item.update(inventory: (@item.inventory - @item_order.quantity))
-    @item.save
+    @item_order = ItemOrder.find(params[:id])
+    @item_order.item.update(inventory: (@item_order.item.inventory - @item_order.quantity))
+    @item_order.fulfilled = true
+    @item_order.save
+    @item_order.item.save
     flash[:notice] = "#{@item_order.id} has been fulfilled."
     redirect_to "/merchant/orders/#{@item_order.order_id}"
   end
