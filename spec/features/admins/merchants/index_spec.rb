@@ -97,13 +97,6 @@ RSpec.describe 'As an Admin' do
 
       click_on "#{@brian.name}"
       expect(current_path).to eq("/admin/merchants/#{@brian.id}")
-
-      expect(page).to have_content(@brian.name)
-      expect(page).to have_content(@brian.address)
-      expect(page).to have_content(@brian.city)
-      expect(page).to have_content(@brian.state)
-      expect(page).to have_content(@brian.zip)
-      expect(page).to have_content("My Items")
     end
   end
 end
