@@ -17,7 +17,7 @@
       <%= link_to "Order #{ord.id}", "/merchant/orders/#{ord.id}", method: :get  %>
       <p>Created order on: <%= ord.created_at %></p>
       <p>Total Quantity: <%= ord.total_quantity %></p>
-      <p>Total Value: $<%= ord.grandtotal %></p>
+      <p>Total Value: <%= number_to_currency(ord.grandtotal) %></p>
     <% end %>
   </section>
   <% end %>
