@@ -20,6 +20,13 @@ tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never po
 pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", activation_status:'Deactivated', inventory: 21)
 
+admin_1 = User.create!(name: 'Mr. Peanutbutter', address: '123 Butter Ave.', city: 'Los Angeles', state: 'LA', zip: 12458, email: 'whodatdog@coolchick.com', password: 'password', role: 2)
+
+user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
+
+merchant_1 = User.create!(name: 'Hanna', address: '123 Hanna Ave.', city: 'Denver', state: 'CO', zip: 12453, email: 'hanna@coolchick.com', password: 'password', role: 1, merchant_id: 1)
+
+
 # @meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 # @brian = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
 
