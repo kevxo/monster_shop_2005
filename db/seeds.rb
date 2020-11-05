@@ -24,7 +24,7 @@ admin_1 = User.create!(name: 'Mr. Peanutbutter', address: '123 Butter Ave.', cit
 
 user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
 
-merchant_1 = User.create!(name: 'Hanna', address: '123 Hanna Ave.', city: 'Denver', state: 'CO', zip: 12453, email: 'hanna@coolchick.com', password: 'password', role: 1, merchant_id: 1)
+merchant_1 = User.create!(name: 'Hanna', address: '123 Hanna Ave.', city: 'Denver', state: 'CO', zip: 12453, email: 'hanna@coolchick.com', password: 'password', role: 1, merchant_id: "#{bike_shop.id}")
 
 
 # @meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
