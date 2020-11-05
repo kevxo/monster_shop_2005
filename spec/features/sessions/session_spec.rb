@@ -19,7 +19,7 @@ RSpec.describe 'Logging in' do
       click_on 'Submit'
 
       expect(current_path).to eq('/profile')
-      expect(page).to have_content('Logged In!')
+      expect(page).to have_content("Logged in as #{user_1.name}")
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe 'Logging in' do
       click_on 'Submit'
 
       expect(current_path).to eq('/merchant')
-      expect(page).to have_content('Logged In!')
+      expect(page).to have_content("Logged in as #{user_1.name}")
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe 'Logging in' do
       click_on 'Submit'
 
       expect(current_path).to eq('/admin')
-      expect(page).to have_content('Logged In!')
+      expect(page).to have_content("Logged in as #{user_1.name}")
     end
   end
 
