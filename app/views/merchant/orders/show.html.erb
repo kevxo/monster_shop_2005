@@ -33,18 +33,19 @@
       <section id = "item-<%=item_order.item_id%>">
         <td><p><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
         <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}"%></p></td>
-        <section id=item_order.item>
+
           <td><p><%= item_order.item.image %></p></td>
-          <% if item_order.item.fill_status == "Unfulfilled" %>
+          <% if item_order.fulfilled == false %>
             <% if item_order.item.inventory_check? %>
-              <td><p><%= link_to "fulfill", "/merchant/orders/#{item_order.item_id}", method: :patch %></p></td>
+              <td><p><%= link_to "fulfill", "/merchant/orders/#{item_order.id}", method: :patch %></p></td>
             <% else %>
               <td><p><%= flash[:notice] = "#{item_order.item.name} not in stock for that quantity." %></p></td>
             <% end %>
-          <td><p><%= item_order.item.fill_status %></p></td>
-          <td><p><%= item_order.item.price %></p></td>
+          <% if item_order.fulfilled %>
+            <p><td><% return "Fulfilled" %></td></p>
+          <% end %>
+          <td><p><%= item_order.price %></p></td>
           <td><p><%= item_order.quantity %></p></td>
-        </section>
           <% end %>
         <td><p><%= number_to_currency(item_order.price)%></p></td>
         <td><p><%= item_order.quantity%></p></td>
