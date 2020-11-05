@@ -14,10 +14,12 @@
         <p> <%= item.description unless @merchant%> </p>
         <p>Price: <%=number_to_currency(item.price) %> </p>
         <p>Inventory: <%= item.inventory %> </p>
-        <p>Active</p>
+        <% if item.activation_status == 'Activated' %>
+          <p>Status: Active %></p>
+        <% else  %>
+          <p>Status: Active %></p>
+        <% end %>
     <% end %>
-      <% if !@merchant %>
-      <% end %>
     </section>
   <% end %>
 </section>
