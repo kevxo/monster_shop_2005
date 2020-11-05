@@ -16,6 +16,7 @@ class Merchant::ItemsController < Merchant::BaseController
       render :new
     end
   end
+
   def change_status
     @merchant = Merchant.find_by(id: current_user.merchant_id)
     item = Item.find(params[:item_id])
@@ -46,7 +47,6 @@ class Merchant::ItemsController < Merchant::BaseController
       render :edit
     end
   end
-
 
   def destroy
     @merchant = Merchant.find_by(id: current_user.merchant_id)

@@ -13,10 +13,10 @@ class Order < ApplicationRecord
   end
 
   def return_quantity
-  items.each do |item|
-    returned = ItemOrder.find_by(item_id: item.id)
-    item.inventory += returned.quantity
-    item.save
+    items.each do |item|
+      returned = ItemOrder.find_by(item_id: item.id)
+      item.inventory += returned.quantity
+      item.save
     end
   end
 
