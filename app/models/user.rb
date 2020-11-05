@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  validates :name, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
   validates_presence_of :password, confirmation: true, on: :create
   validates_presence_of :password, confirmation: true, on: :update, if: :password
   validates_presence_of :address, :city, :state, :zip
+
 
   has_many :orders
   belongs_to :merchant, optional: true
