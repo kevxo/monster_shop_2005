@@ -8,4 +8,6 @@
 </ul>
 <%= link_to 'Edit Profile', '/profile/edit' %>
 <%= link_to 'Change Password', '/profile/change_password' %>
-<%= link_to 'My Orders', '/profile/orders' %>
+<% if !current_user.admin? %>
+  <%= link_to 'My Orders', '/profile/orders' %>
+<% end %>
