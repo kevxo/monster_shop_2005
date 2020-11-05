@@ -19,7 +19,7 @@ RSpec.describe 'On the registration page' do
 
     expect(current_path).to eq('/profile')
 
-    expect(page).to have_content('Logged In!')
+    expect(page).to have_content("Logged in as Grant")
     expect(page).to have_content('Hello, Grant!')
   end
 
