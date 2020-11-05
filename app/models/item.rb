@@ -53,4 +53,8 @@ class Item < ApplicationRecord
   def subtotal
     price * quantity_purchased
   end
+
+  def inventory_check?
+    inventory >= ItemOrder.find_by(item_id: id).quantity
+  end
 end

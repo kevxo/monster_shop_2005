@@ -92,6 +92,21 @@ describe Item, type: :model do
 
       expect(@tire.subtotal).to eq(200)
     end
+    it "#inventory_check" do
+      brian = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+      pull_toy = brian.items.create!(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 9)
+      tire = brian.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 9)
+
+      user_1 = User.create!(name: 'Carson', address: '123 Carson Ave.', city: 'Denver', state: 'CO', zip: 12458, email: 'carson@coolchick.com', password: 'password', role: 0)
+      order_2 = user_1.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order_3 = user_1.orders.create!(name: 'Kevin', address: '123 Kevin Ave', city: 'Kevin Town', state: 'FL', zip: 90909)
+
+      item_order_1 = order_2.item_orders.create!(item: pull_toy, price: pull_toy.price, quantity: 10)
+      item_order_2 = order_3.item_orders.create!(item: tire, price: tire.price, quantity: 9)
+
+      expect(item_order_1.item.inventory_check?).to eq(false)
+      expect(item_order_2.item.inventory_check?).to eq(true)
+    end
   end
 
   describe 'class methods' do

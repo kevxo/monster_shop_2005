@@ -28,16 +28,11 @@ class OrdersController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item_order = ItemOrder.find_by(item_id: params[:id])
-    if @item.inventory >= @item_order.quantity
-      @item.fill_status = "Fulfilled"
-      @item.update(inventory: (@item.inventory - @item_order.quantity))
-      @item.save
-      flash[:notice] = "#{@item_order.id} has been fulfilled."
-      redirect_to "/merchant/orders/#{@item_order.order_id}"
-    else
-      flash[:notice] = "#{@item_order.id} cannot be fulfilled due to lack of inventory."
-      redirect_to "/merchant/orders/#{@item_order.order_id}"
-    end
+    @item.fill_status = "Fulfilled"
+    @item.update(inventory: (@item.inventory - @item_order.quantity))
+    @item.save
+    flash[:notice] = "#{@item_order.id} has been fulfilled."
+    redirect_to "/merchant/orders/#{@item_order.order_id}"
   end
 
   private
