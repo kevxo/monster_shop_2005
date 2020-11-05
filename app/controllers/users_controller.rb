@@ -61,8 +61,8 @@ class UsersController < ApplicationController
     elsif user_params[:password] == user_params[:password_confirmation]
       @user.update(user_params)
       @user.save
-      flash.now[:notice] = "Password Updated!"
-      render :show
+      flash[:notice] = "Password Updated!"
+      redirect_to '/profile'
     elsif user_params[:password] != user_params[:password_confirmation]
       flash.now[:notice] = "Password and Confirmation do not match."
       render :password_edit
