@@ -4,8 +4,8 @@
 <% else %>
   <h1>All Items</h1>
 <% end %>
-<section class="grid-container">
-  <% @items.each do |item| %>
+<% @items.each do |item| %>
+  <section class="grid-container">
     <% if item.activation_status == 'Activated' %>
       <section class = "grid-item" id= 'item-<%=item.id%>'>
         <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
@@ -15,12 +15,12 @@
         <p>Price: <%=number_to_currency(item.price) %> </p>
         <p>Inventory: <%= item.inventory %> </p>
         <% if item.activation_status == 'Activated' %>
-          <p>Status: Active %></p>
+          <p>Status: Active </p>
         <% else  %>
-          <p>Status: Active %></p>
+          <p>Status: Deactivated </p>
         <% end %>
+      </section>
     <% end %>
-    </section>
   <% end %>
 </section>
 
