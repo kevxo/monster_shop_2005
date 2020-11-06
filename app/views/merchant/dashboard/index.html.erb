@@ -9,8 +9,7 @@
   </ul>
 </section>
 
-<%= link_to "My Items", "/merchant/items" %>
-
+<h3><%= link_to "My Items", "/merchant/items" %></h3>
 
 <% @order.each do |ord| %>
   <section id="order-info-<%= ord.id %>">
