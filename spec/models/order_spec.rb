@@ -41,7 +41,7 @@ describe Order, type: :model do
       expect(@order_1.total_quantity).to eq(0)
     end
 
-    it "package order" do
+    it "package_order" do
       @item_order_1.update_attributes(fulfilled: true)
       @item_order_2.update_attributes(fulfilled: true)
 
