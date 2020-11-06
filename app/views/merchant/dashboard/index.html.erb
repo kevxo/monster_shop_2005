@@ -16,7 +16,7 @@
   <section id="order-info-<%= ord.id %>">
     <% if ord.status == 'pending' %>
       <%= link_to "Order #{ord.id}", "/merchant/orders/#{ord.id}", method: :get  %>
-      <p>Created order on: <%= ord.created_at %></p>
+      <p>Created order on: <%= ord.created_at.strftime("%m-%d-%Y") %></p>
       <p>Total Quantity: <%= ord.total_quantity %></p>
       <p>Total Value: <%= number_to_currency(ord.grandtotal) %></p>
     <% end %>
