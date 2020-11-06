@@ -1,6 +1,7 @@
 <p align="center"><%= link_to "New Merchant", "/merchants/new" %></p>
 <% @merchants.each do |merchant|%>
   <% if current_user && current_user.admin? %>
+    <h2> <%= link_to "Admin Merchants Dashboard", "/admin/merchants" %></h2>
     <h2><%=link_to merchant.name, "/admin/merchants/#{merchant.id}"%></h2>
   <% else %>
     <h2><%=link_to merchant.name, "/merchants/#{merchant.id}"%></h2>

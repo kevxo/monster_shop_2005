@@ -104,10 +104,10 @@ RSpec.describe 'merchant show page', type: :feature do
           click_link "fulfill"
         end
 
-        expect(current_path).to eq("/merchant/orders/#{order_1.id}")
-
-        expect(page).to have_content("#{item_order_1.order.id} has been fulfilled.")
         tire.reload
+        expect(current_path).to eq("/merchant/orders/#{order_1.id}")
+        expect(page).to have_content("#{item_order_1.id} has been fulfilled.")
+
         expect(tire.inventory).to eq(10)
     end
     it "Merchant fulfills part of an order" do
