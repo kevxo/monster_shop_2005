@@ -12,7 +12,4 @@ class User < ApplicationRecord
 
   enum role: %w(default merchant admin)
 
-  def password_changed?
-    !password.blank?
-  end
 end
