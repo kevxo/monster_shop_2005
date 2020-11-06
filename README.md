@@ -19,7 +19,7 @@ Monster Shop was a collaborative project that was accomplished through a combina
 The project came with a project spec, database, working rails app courtesy of Turing School of Software and Design. We worked together to add tables and functionality that restrict access to certain users. A logged in user can add items to their cart and checkout, as well as update their profile information. A merchant can add new items, enable/disable items, and fulfill orders. An admin can add and edit merchants, and package orders. We were able to build all of the functionality outlined in the spec and in future iterations we would like styling and attempt some extensions.
 
 ### Test Coverage
-- simplecov: 99.84%
+- simplecov: 100%
 - rspec: 100%
 
 ### Installation Instructions
