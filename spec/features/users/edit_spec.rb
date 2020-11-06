@@ -22,6 +22,16 @@ RSpec.describe 'On the profile edit page' do
     fill_in :name, with: user_1.name
     fill_in :address, with: user_1.address
     fill_in :city, with: user_1.city
+    fill_in :state, with: ''
+    fill_in :zip, with: '54321'
+    fill_in :email, with: user_1.email
+    click_on 'Submit'
+    expect(current_path).to eq('/profile/edit')
+    expect(page).to have_content("State can't be blank")
+
+    fill_in :name, with: user_1.name
+    fill_in :address, with: user_1.address
+    fill_in :city, with: user_1.city
     fill_in :state, with: user_1.state
     fill_in :zip, with: '54321'
     fill_in :email, with: user_1.email
@@ -49,6 +59,16 @@ RSpec.describe 'On the profile edit page' do
     click_on 'Submit'
     click_on 'Change Password'
     expect(current_path).to eq('/profile/change_password')
+
+    click_on 'Submit'
+    expect(page).to have_content("Password cannot be blank.")
+
+    fill_in :password, with: 'new password'
+    fill_in :password_confirmation, with: 'password'
+    click_on 'Submit'
+
+    expect(current_path).to eq('/profile/change_password')
+    expect(page).to have_content("Password and Confirmation do not match.")
 
     fill_in :password, with: 'new password'
     fill_in :password_confirmation, with: 'new password'
