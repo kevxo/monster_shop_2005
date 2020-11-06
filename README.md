@@ -11,7 +11,7 @@ Turing School of Software and Design- Module 2 Week 4/5 Group Project
 This project sets up an ecommerce site. [You can check it out here!](https://agile-temple-04253.herokuapp.com/)
 
 ### Design
-<img src="https://github.com/Oxalisviolacea/futbol/blob/main/images/flow_chart.png" width="350" height="350">
+<img src="https://github.com/GDemps/monster_shop_2005/blob/main/monster_shop_db_visual.png" width="350" height="350">
 
 ### Process
 Monster Shop was a collaborative project that was accomplished through a combination of remote pairing and independent work. We used an agile workflow with a github project board. 
