@@ -73,7 +73,7 @@ RSpec.describe 'As a merchant employee' do
 
       within "#order-info-#{order_2.id}" do
         expect(page).to_not have_link("Order #{order_2.id}")
-        expect(page).to_not have_content("Created order on: #{meg.created_at}")
+        expect(page).to_not have_content("Created order on: #{meg.created_at.strftime("%m-%d-%Y")}")
         expect(page).to_not have_content("Total Quantity: #{order_2.total_quantity}")
         expect(page).to_not have_content("Total Value: $#{order_2.grandtotal}")
       end
