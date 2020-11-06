@@ -36,6 +36,9 @@ describe Order, type: :model do
     end
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
+
+      @order_1.status = "cancelled"
+      expect(@order_1.total_quantity).to eq(0)
     end
 
     it "package_order" do
@@ -44,6 +47,10 @@ describe Order, type: :model do
 
       @order_1.package_order
       expect(@order_1.status).to eq("packaged")
+    end
+
+    it "return_quantity" do
+      expect(@order_1.return_quantity).to eq([@tire, @pull_toy])
     end
   end
 end

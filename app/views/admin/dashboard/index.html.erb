@@ -4,6 +4,15 @@
 
 <% @orders.each do |order| %>
   <section id="order-<%= order.id %>">
+    <% if order.status == 'packaged' %>
+      <h4>Packaged</h4>
+    <% elsif order.status == 'pending' %>
+      <h4>Pending</h4>
+    <% elsif order.status == 'shipped' %>
+      <h4>Shipped</h4>
+    <% else %>
+      <h4>Cancelled</h4>
+    <% end %>
     <p><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></p>
     <p>Order ID: <%= order.id %></p>
     <p>Created On: <%= order.created_at.strftime("%m-%d-%Y")%></p>

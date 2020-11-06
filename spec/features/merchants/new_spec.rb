@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'merchant new page', type: :feature do
   describe 'As a user' do
     it 'I can create a new merchant' do
+
       visit '/merchants/new'
 
       name = "Sal's Calz(ones)"
@@ -49,6 +50,5 @@ RSpec.describe 'merchant new page', type: :feature do
       expect(page).to have_content("Address can't be blank and State can't be blank")
       expect(page).to have_button("Create Merchant")
     end
-
   end
 end

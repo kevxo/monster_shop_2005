@@ -38,7 +38,7 @@ class UsersController < ApplicationController
         @user.update(user_edit_params)
         if !@user.update(user_edit_params)
           flash[:error] = @user.errors.full_messages.to_sentence
-          render :edit
+          redirect_to '/profile/edit'
         else
           flash[:notice] = 'Profile Updated!'
           render :show
@@ -47,8 +47,6 @@ class UsersController < ApplicationController
         flash.now[:notice] = "Email is already in use."
         render :edit
       end
-    else
-      flash[:error] = @user.errors.full_messages.to_sentence
     end
   end
 
@@ -65,9 +63,6 @@ class UsersController < ApplicationController
       redirect_to '/profile'
     elsif user_params[:password] != user_params[:password_confirmation]
       flash.now[:notice] = "Password and Confirmation do not match."
-      render :password_edit
-    else
-      flash[:error] = @user.errors.full_messages.to_sentence
       render :password_edit
     end
   end
