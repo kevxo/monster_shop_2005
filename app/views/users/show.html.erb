@@ -6,8 +6,8 @@
   <li>Address: <%= @user.address %> <%= @user.city %>, <%= @user.state %> <%= @user.zip %></li>
   <li>Email: <%= @user.email %></li>
 </ul>
-<%= link_to 'Edit Profile', '/profile/edit' %>
-<%= link_to 'Change Password', '/profile/change_password' %>
+<%= link_to 'Edit Profile', '/profile/edit' %><br> 
+<%= link_to 'Change Password', '/profile/change_password' %><br>
 <% if !current_user.admin? %>
   <%= link_to 'My Orders', '/profile/orders' %>
 <% end %>
