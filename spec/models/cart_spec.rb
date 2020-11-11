@@ -60,20 +60,24 @@ RSpec.describe Cart do
         })
     end
 
+    it '.grand_total' do
+      expect(@cart.grand_total).to eq(120)
+    end
+
+    it '.discounted_grand_total' do
+      @megan.discounts.create(percent: 5, item_quantity: 10)
+        10.times do
+          @cart.add_item(@ogre.id.to_s)
+        end
+      expect(@cart.discounted_grand_total).to eq(309)
+    end
+
     it '.discounted_subtotal_of()' do
       @megan.discounts.create(percent: 5, item_quantity: 10)
       10.times do
         @cart.add_item(@ogre.id.to_s)
       end
       expect(@cart.discounted_subtotal_of(@ogre.id)).to eq(209)
-    end
-
-    it '.discounted_grand_total' do
-      @megan.discounts.create(percent: 5, item_quantity: 10)
-      10.times do
-        @cart.add_item(@ogre.id.to_s)
-      end
-      expect(@cart.discounted_grand_total).to eq(309)
     end
 
     it '.minus_quantity' do
