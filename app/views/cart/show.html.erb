@@ -30,32 +30,24 @@
       </td>
       <td>
         <center>
-            <%= quantity %>
+          <%= quantity %>
             <%= form_tag "/cart/#{item.id}", method: :patch do %>
             <%=  number_field_tag :quantity, 0, min: 0, max: item.inventory %>
             <p><%= submit_tag 'Quantity +'%></p>
             <p><%= submit_tag 'Quantity -'%></p>
-            <% end %>
+          <% end %>
+
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
         </td>
       <td>
-        <% if cart.find_discount(item.id) %>
-          <p>Discounted Subtotal: <%= number_to_currency(cart.discounted_subtotal_of(item.id)) %></p>
-        <% else %>
-          <p>Subtotal: <%= number_to_currency(cart.subtotal_of(item.id)) %></p>
-        <% end %>
+        <p><%=number_to_currency(cart.subtotal(item))%></p>
     </td>
     </tr>
   <% end %>
 
-
 </table>
-<% if cart.discounted_grand_total == cart.grand_total %>
-  <h3>Total: <%= number_to_currency(cart.grand_total) %></h3>
-<% else %>
-  <h3>Discounted Total: <%= number_to_currency(cart.discounted_grand_total) %></h3>
-<% end %>
+  <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
     <% if current_user %>
       <p><%= link_to "Checkout", "/orders/new", method: :get %></p>
