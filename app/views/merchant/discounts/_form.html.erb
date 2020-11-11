@@ -1,0 +1,10 @@
+<%= form_for [:merchant, @discount] do |f| %>
+
+  <%= f.label :percent, 'Percent' %>
+  <%= f.text_field :percent  %>
+
+  <%= f.label :item_quantity, 'Item Quantity'%>
+  <%= f.text_field :item_quantity %>
+  <%= f.hidden_field :merchant_id, value: current_user.merchant_id %>
+  <%= f.submit %>
+<% end %>
