@@ -1,0 +1,4 @@
+<p><%= @discount.percent %>% when purchasing <%= @discount.item_quantity %> or more items</p>
+<p><%= @discount.created_at %></p>
+<%= link_to "Edit Discount", "/discounts/#{@discount.id}/edit" %><br>
+<%= button_to "Delete Discount", "/discounts/#{@discount.id}", method: :delete %>
