@@ -3,16 +3,16 @@ class Merchant::DiscountsController < Merchant::BaseController
     @merchant = current_user.merchant
   end
 
+  def new
+    @discount = Discount.new
+  end
+
   def show
     @discount = Discount.find(params[:id])
   end
 
   def edit
     @discount = Discount.find(params[:id])
-  end
-
-  def new
-    @discount = Discount.new
   end
 
   def update
@@ -31,7 +31,7 @@ class Merchant::DiscountsController < Merchant::BaseController
     @discount = Discount.new(discount_params)
     if @discount.save
       flash[:success] = "New Discount Created"
-      redirect_to merchant_discounts_path
+      redirect_to merchant_discount_path
     else
       flash[:error] = @discount.errors.full_messages.to_sentence
       render :new
