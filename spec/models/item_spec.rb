@@ -148,5 +148,19 @@ describe Item, type: :model do
 
       expect(Item.least_popular).to eq(expected)
     end
+
+    it ".find_price" do
+      megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      ogre = megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', activation_status: true, inventory: 5 )
+      giant = megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', activation_status: true, inventory: 5 )
+      cart = Cart.new({
+        ogre.id.to_s => 1,
+        giant.id.to_s => 2
+        })
+      megan.discounts.create(percent: 5, item_quantity: 10)
+      expect(ogre.find_price(cart)).to eq(20)
+      cart.contents[ogre.id.to_s] = 10
+      expect(ogre.find_price(cart)).to eq(19)
+    end
   end
 end
