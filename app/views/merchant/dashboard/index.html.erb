@@ -12,7 +12,6 @@
 <%= link_to "My Items", "/merchant/items" %>
 <%= link_to 'View Bulk Discounts', '/merchant/discounts' %>
 
-
 <% @order.each do |ord| %>
   <section id="order-info-<%= ord.id %>">
     <% if ord.status == 'pending' %>
