@@ -26,7 +26,24 @@ class Merchant::DiscountsController < Merchant::BaseController
       render :edit
     end
   end
-  
+
+  def create
+    @discount = Discount.new(discount_params)
+    if @discount.save
+      flash[:success] = "New Discount Created"
+      redirect_to merchant_discounts_path
+    else
+      flash[:error] = @discount.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
+  def destroy
+    Discount.destroy(params[:id])
+    flash[:notice] = "Discount deleted"
+    redirect_to merchant_discount_path
+  end
+
   private
 
   def discount_params
