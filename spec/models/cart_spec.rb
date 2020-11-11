@@ -60,6 +60,22 @@ RSpec.describe Cart do
         })
     end
 
+    it '.discounted_subtotal_of()' do
+      @megan.discounts.create(percent: 5, item_quantity: 10)
+      10.times do
+        @cart.add_item(@ogre.id.to_s)
+      end
+      expect(@cart.discounted_subtotal_of(@ogre.id)).to eq(209)
+    end
+
+    it '.discounted_grand_total' do
+      @megan.discounts.create(percent: 5, item_quantity: 10)
+      10.times do
+        @cart.add_item(@ogre.id.to_s)
+      end
+      expect(@cart.discounted_grand_total).to eq(309)
+    end
+
     it '.minus_quantity' do
       brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
       hippo = brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', inventory: 3 )
