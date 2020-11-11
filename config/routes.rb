@@ -56,6 +56,11 @@ Rails.application.routes.draw do
     delete '/items/:item_id', to: 'items#destroy'
     get '/orders/:id', to: 'orders#show'
     patch "/orders/:id", to: 'orders#update'
+    get "/discounts", to: 'discounts#index', as: :merchant_discount
+    get "/discounts/:id", to: 'discounts#show'
+    get '/discounts/:id/edit', to: 'discounts#edit'
+    get '/discounts/new', to: 'discounts#new', as: :new_merchant_discount
+    delete '/discounts/:id', to: 'discounts#destroy', as: :delete_merchant_discount
   end
 
   namespace :admin do
