@@ -57,9 +57,10 @@ Rails.application.routes.draw do
     get '/orders/:id', to: 'orders#show'
     patch "/orders/:id", to: 'orders#update'
     get "/discounts", to: 'discounts#index', as: :discount
+    post '/discounts', to: 'discounts#create'
+    get "/discounts/new", to: 'discounts#new', as: :new_discount
     get "/discounts/:id", to: 'discounts#show'
     get "/discounts/:id/edit", to: 'discounts#edit', as: :edit_discount
-    get "/discounts/new", to: 'discounts#new', as: :new_discount
     delete '/discounts/:id', to: 'discounts#destroy', as: :delete_discount
     patch '/discounts.:id', to: 'discounts#update'
   end
