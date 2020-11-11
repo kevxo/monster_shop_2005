@@ -64,7 +64,7 @@ RSpec.describe 'On the admin dashboard page' do
   it "I can ship any packaged orders and user can no longer cancel it" do
     visit '/admin'
 
-    within "#order-#{@order_2.id}" do
+    within "#packaged_order-#{@order_2.id}" do
       expect(page).to have_button("Ship Order")
 
       click_button("Ship Order")
@@ -78,7 +78,7 @@ RSpec.describe 'On the admin dashboard page' do
   it "I can't ship any orders without status of packaged" do
     visit '/admin'
 
-    within "#order-#{@order_1.id}" do
+    within "#cancelled_order-#{@order_1.id}" do
       expect(page).to_not have_button("Ship Order")
     end
   end

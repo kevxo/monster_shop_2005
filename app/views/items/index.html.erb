@@ -30,7 +30,7 @@
   <h4>Top 5 Items Purchased:</h4>
   <ol>
     <% Item.most_popular.each do |item| %>
-      <li><%= item.name %>: <%= item.quantity_purchased %> Purchased </li>
+      <li><%= item.name %>: <%= item.quantity_purchased %> purchased </li>
     <% end %>
   </ol>
 </section>
@@ -39,7 +39,7 @@
   <h4>Bottom 5 Items Purchased:</h4>
   <ol>
     <% Item.least_popular.each do |item| %>
-      <li><%= item.name %>: <%= item.quantity_purchased %> Purchased </li>
+      <li><%= item.name %>: <%= item.quantity_purchased %> purchased </li>
     <% end %>
   </ol>
 </section>

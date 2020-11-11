@@ -28,7 +28,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def change_status
+  def package_order
     if item_orders.where(fulfilled: true).count == item_orders.count
       update_attributes(status: 0)
     end

@@ -195,3 +195,20 @@ RSpec.describe 'Logging out' do
   end
 
 end
+
+
+describe 'Account not found' do
+  it "should display 'Account not found'" do
+    visit '/login'
+
+    email = 'fail1234@fail.com'
+    password = '765858'
+    fill_in :email, with: email
+    fill_in :password, with: password
+
+    click_on 'Submit'
+
+    expect(current_path).to eq('/register/new')
+    expect(page).to have_content('Account not found.')
+  end
+end
