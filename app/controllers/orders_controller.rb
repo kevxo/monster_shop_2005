@@ -13,8 +13,8 @@ class OrdersController < ApplicationController
       cart.items.each do |item,quantity|
         order.item_orders.create({
           item: item,
-          quantity: cart.count_of(item.id),
-          price: item.find_price(@cart)
+          quantity: quantity,
+          price: item.price
           })
       end
       session.delete(:cart)

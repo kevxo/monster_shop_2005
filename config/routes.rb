@@ -54,16 +54,8 @@ Rails.application.routes.draw do
     get '/items/:item_id/edit', to: 'items#edit'
     patch '/items/:item_id/edit', to: 'items#update'
     delete '/items/:item_id', to: 'items#destroy'
-
-    get '/orders/:id', to: 'orders#show'
-    patch "/orders/:id", to: 'orders#update'
-    get "/discounts", to: 'discounts#index', as: :discount
-    post '/discounts', to: 'discounts#create'
-    get "/discounts/new", to: 'discounts#new', as: :new_discount
-    get "/discounts/:id", to: 'discounts#show'
-    get "/discounts/:id/edit", to: 'discounts#edit', as: :edit_discount
-    delete '/discounts/:id', to: 'discounts#destroy', as: :delete_discount
-    patch '/discounts.:id', to: 'discounts#update'
+    get '/orders/:order_id', to: 'orders#show'
+    patch "/orders/:order_id", to: 'orders#update'
   end
 
   namespace :admin do

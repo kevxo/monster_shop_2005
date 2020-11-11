@@ -57,9 +57,4 @@ class Item < ApplicationRecord
   def inventory_check?
     inventory >= ItemOrder.find_by(item_id: id).quantity
   end
-
-  def find_price(cart)
-    return cart.find_discounted_price(id) if cart.find_discount(id)
-    price
-  end
 end
